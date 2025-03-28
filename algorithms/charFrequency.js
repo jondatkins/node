@@ -8,8 +8,9 @@ function charFrequency(str) {
   let frequency = {};
 
   [...str].forEach((element) => {
-    if (Object.hasOwn(frequency, element)) {
-      frequency[element] += 1;
+    // if (Object.hasOwn(frequency, element)) {
+    if (frequency[element] > 0) {
+      frequency[element]++;
     }
     else {
       frequency[element] = 1;
