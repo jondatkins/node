@@ -7,16 +7,24 @@ function charFrequency(str) {
   }
   let frequency = {};
 
-  [...str].forEach((element) => {
-    // if (Object.hasOwn(frequency, element)) {
-    if (frequency[element] > 0) {
-      frequency[element]++;
-    }
-    else {
-      frequency[element] = 1;
-    }
-  })
+  for (let char of str) {
+    char = char.toLowerCase();
+    frequency[char] = ++frequency[char] || 1;
+    // if (frequency[char] > 0) {
+    //   frequency[char]++;
+    // }
+    // else {
+    //   frequency[char] = 1;
+    // }
+  }
   return frequency;
+}
+
+function isAlphaNumeric(char) {
+  if (/[a-zA-Z0-9]/.test(char)) {
+    return true;
+  }
+  return false;
 }
 
 result = charFrequency('hello'); // { h: 1, e: 1, l: 2, o: 1 }
@@ -29,3 +37,7 @@ result4 = charFrequency(undefined); // undefined
 console.log(result4);
 result5 = charFrequency(null); // null
 console.log(result5);
+console.log(isAlphaNumeric("!"))
+console.log(isAlphaNumeric("a"))
+
+exports.charFrequency = charFrequency;
