@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node index.ts",
-    "test": "jest"
+    "start": "node index.js",
+    "test": "jest ./tests/same.test.js"
   },
   "keywords": [],
   "author": "",
