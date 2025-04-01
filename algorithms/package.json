@@ -2,8 +2,12 @@
   "name": "algorithms",
   "version": "1.0.0",
   "description": "",
-  "main": "charFrequency.js",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
   "scripts": {
+    "start": "node index.ts",
     "test": "jest"
   },
   "keywords": [],
