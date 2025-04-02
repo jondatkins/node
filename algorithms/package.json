@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node index.js",
-    "test": "jest ./tests/same.test.js"
+    "start": "node ./index.js",
+    "test": "jest ./tests/anagram.test.js"
   },
   "keywords": [],
   "author": "",
