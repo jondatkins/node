@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "jest ./tests/anagram.test.js"
+    "test": "jest ./tests/countUniqueValues.test.js"
   },
   "keywords": [],
   "author": "",

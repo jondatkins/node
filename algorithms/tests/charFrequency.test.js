@@ -10,5 +10,5 @@ test('', () => {
   expect(charFreq.charFrequency('abbcccdddd')).toEqual({ 'a': 1, 'b': 2, 'c': 3, 'd': 4 })
 })
 test('', () => {
-  expect(charFreq.charFrequency()).toBeUndefined(undefined)
+  expect(charFreq.charFrequency()).toBeUndefined()
 })
