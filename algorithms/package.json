@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "jest ./tests/countUniqueValues.test.js"
+    "test": "jest ./tests/maxSubarraySum.test.js"
   },
   "keywords": [],
   "author": "",
