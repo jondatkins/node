@@ -26,10 +26,16 @@
 // console.log(uniqueValues.countUniqueValues([1, 2, 3, 4, 4, 4, 7, 7, 12, 12, 13])) // 7
 // console.log(uniqueValues.countUniqueValues([])) // 0
 // console.log(uniqueValues.countUniqueValues([-2, -1, -1, 0, 1])) // 4
-const maxSubarraySum = require('./modules/maxSubarraySum.js');
+// const maxSubarraySum = require('./modules/maxSubarraySum.js');
 
-console.log(maxSubarraySum.maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 2)) // 10
-console.log(maxSubarraySum.maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 4)) // 17
-console.log(maxSubarraySum.maxSubarraySum([4, 2, 1, 6], 1)) // 6
-console.log(maxSubarraySum.maxSubarraySum([4, 2, 1, 6, 2], 4)) // 13
-console.log(maxSubarraySum.maxSubarraySum([], 4)) // null
+// console.log(maxSubarraySum.maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 2)) // 10
+// console.log(maxSubarraySum.maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 4)) // 17
+// console.log(maxSubarraySum.maxSubarraySum([4, 2, 1, 6], 1)) // 6
+// console.log(maxSubarraySum.maxSubarraySum([4, 2, 1, 6, 2], 4)) // 13
+// console.log(maxSubarraySum.maxSubarraySum([], 4)) // null
+// console.log(maxSubarraySum.maxSubarraySum3([2, 6, 9, 2, 1, 8, 5, 6, 3], 3))
+
+
+const longestUniqueSequence = require('./modules/longestUniqueSequence.js');
+// console.log(longestUniqueSequence.maxUniqueCharacters("hellothere"));
+console.log(longestUniqueSequence.maxUniqueCharacters("hellothereaxzypms"));
