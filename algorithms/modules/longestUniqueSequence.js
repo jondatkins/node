@@ -19,16 +19,19 @@ const maxUniqueCharacters = (testString) => {
       if (temp.length > max.length) {
         max = temp;
         temp = "";
+        console.log(max)
         // i = temp.length - 1;
         // i--;
-        if (testString.length - i < max.length) {
-          return max;
-        }
-        testString = testString.slice(i, testString.length - 1);
-        i = 0;
+        // if (testString.length - i < max.length) {
+        //   return max;
+        // }
+        // testString = testString.slice(i, testString.length - 1);
       }
     }
+    // i++;
   }
 }
+
+maxUniqueCharacters("hellothereaxzypms");
 
 module.exports = { maxUniqueCharacters };
