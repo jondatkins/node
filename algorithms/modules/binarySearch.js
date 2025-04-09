@@ -29,9 +29,9 @@ const binarySearch = (searchArray, numbToSearch) => {
 // binarySearch([1, 2, 3, 4, 5, 6], 11) // -1
 // binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)
 
-const arr = [1, 2, 3, 4, 5, 6]
+const testArray = [1, 2, 3, 4, 5, 6]
 
-function findMe(target, start, end) {
+function findMe(arr, target, start, end) {
   if (start > end) {
     return -1;
   }
@@ -41,15 +41,15 @@ function findMe(target, start, end) {
   }
 
   if (arr[middle] > target) {
-    return findMe(target, start, middle - 1);
+    return findMe(arr, target, start, middle - 1);
   }
 
   if (arr[middle] < target) {
-    return findMe(target, middle + 1, end)
+    return findMe(arr, target, middle + 1, end)
   }
 }
 // console.log(findMe(3, 0, arr.length - 1));
-console.log(findMe(5, 0, arr.length - 1));
+console.log(findMe(testArray, 5, 0, testArray.length - 1));
 // console.log(findMe(1, 0, arr.length - 1));
 // console.log(findMe(7, 0, arr.length - 1));
 
