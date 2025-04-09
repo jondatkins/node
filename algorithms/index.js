@@ -43,7 +43,14 @@ const longestUniqueSequence = require('./modules/longestUniqueSequence.js');
 // console.log(longestUniqueSequence.maxUniqueCharacters("hlelothere"));
 // console.log(longestUniqueSequence.maxUniqueCharacters("hellothereeaxzypms"));
 
-const binSearch = require('./modules/binarySearch.js');
+// const binSearch = require('./modules/binarySearch.js');
 // console.log(binSearch.binarySearch([1, 2, 3, 4, 5, 6], 4)) // 3
 // console.log(binSearch.binarySearch([1, 2, 3, 4, 5, 6], 6)) // 5
-console.log(binSearch.binarySearch([1, 2, 3, 4, 5, 6], 11)) // -1
+// console.log(binSearch.binarySearch([1, 2, 3, 4, 5, 6], 11)) // -1
+
+const sameFreq = require('./modules/sameFrequency.js')
+
+console.log(sameFreq.sameFrequency(182, 281)) // true
+console.log(sameFreq.sameFrequency(34, 14)) // false
+console.log(sameFreq.sameFrequency(3589578, 5879385)) // true
+console.log(sameFreq.sameFrequency(22, 222)) // false
