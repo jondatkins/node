@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "jest ./tests/binarySearch.test.js"
+    "test": "jest ./tests/sameFrequency.test.js"
   },
   "keywords": [],
   "author": "",
