@@ -13,23 +13,19 @@ const maxUniqueCharacters = (testString) => {
 
     if (temp.indexOf(currChar) == -1) {
       temp += currChar;
-      i++;
     }
     else {
       if (temp.length > max.length) {
         max = temp;
-        temp = "";
-        console.log(max)
-        // i = temp.length - 1;
-        // i--;
-        // if (testString.length - i < max.length) {
-        //   return max;
-        // }
-        // testString = testString.slice(i, testString.length - 1);
+        temp = currChar;
       }
     }
-    // i++;
+    i++;
   }
+  if (temp.length > max.length) {
+    max = temp;
+  }
+  return max;
 }
 
 maxUniqueCharacters("hellothereaxzypms");

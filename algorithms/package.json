@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "jest ./tests/longestUniqueSequence.test.js"
+    "test": "jest ./tests/binarySearch.test.js"
   },
   "keywords": [],
   "author": "",

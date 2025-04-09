@@ -38,4 +38,12 @@
 
 const longestUniqueSequence = require('./modules/longestUniqueSequence.js');
 // console.log(longestUniqueSequence.maxUniqueCharacters("hellothere"));
-console.log(longestUniqueSequence.maxUniqueCharacters("hellothereaxzypms"));
+// console.log(longestUniqueSequence.maxUniqueCharacters("helothere"));
+// console.log(longestUniqueSequence.maxUniqueCharacters("llhelothere"));
+// console.log(longestUniqueSequence.maxUniqueCharacters("hlelothere"));
+// console.log(longestUniqueSequence.maxUniqueCharacters("hellothereeaxzypms"));
+
+const binSearch = require('./modules/binarySearch.js');
+// console.log(binSearch.binarySearch([1, 2, 3, 4, 5, 6], 4)) // 3
+// console.log(binSearch.binarySearch([1, 2, 3, 4, 5, 6], 6)) // 5
+console.log(binSearch.binarySearch([1, 2, 3, 4, 5, 6], 11)) // -1
