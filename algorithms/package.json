@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node ./index.js",
-    "test": "jest ./tests/sameFrequency.test.js"
+    "start": "node ./runAreThereDupes.js",
+    "test": "jest ./tests/areThereDuplicates.test.js"
   },
   "keywords": [],
   "author": "",
