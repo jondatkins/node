@@ -16,7 +16,6 @@ const areThereDuplicates = (...theArgs) => {
 // areThereDuplicates('a', 'b', 'c', 'a') // true 
 
 const areThereDuplicates2 = (...theArgs) => {
-  let argsFrequency = {};
   let i = 0;
   let j = i + 1;
   while (i < theArgs.length) {
