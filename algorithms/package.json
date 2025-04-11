@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./runAreThereDupes.js",
-    "test": "jest ./tests/constructNote.test.js"
+    "test": "jest ./tests/findAllDuplicates.test.js"
   },
   "keywords": [],
   "author": "",
