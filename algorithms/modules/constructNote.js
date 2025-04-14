@@ -1,7 +1,4 @@
 const constructNote = (message, letters) => {
-  if (letters.length < message.length) {
-    return false;
-  }
   let messageFreq = {};
   let lettersFreq = {};
 
