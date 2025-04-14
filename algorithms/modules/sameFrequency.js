@@ -20,16 +20,22 @@ const sameFrequency = (number1, number2) => {
     numFreq2[digit2] = ++numFreq2[digit2] || 1;
     i++;
   }
-  for (const prop in numFreq1) {
-    if (!(prop in numFreq2)) {
-      return false;
-    }
-    if (numFreq1[prop] !== numFreq2[prop]) {
-      return false;
-    }
+  for (let key in numFreq1) {
+    if (numFreq1[key] !== numFreq2[key]) return false;
   }
+  // for (const prop in numFreq1) {
+  //   if (!(prop in numFreq2)) {
+  //     return false;
+  //   }
+  //   if (numFreq1[prop] !== numFreq2[prop]) {
+  //     return false;
+  //   }
+  // }
   return true;
 }
 
-// sameFrequency(182, 281) // true
+console.log(sameFrequency(182, 281)) //true
+console.log(sameFrequency(34, 14)) //false
+console.log(sameFrequency(3589578, 5879385)) //true
+console.log(sameFrequency(22, 222)) //false
 module.exports = { sameFrequency };
