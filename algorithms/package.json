@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./runAreThereDupes.js",
-    "test": "jest ./tests/averagePair.test.js"
+    "test": "jest ./tests/isSubsequence.test.js"
   },
   "keywords": [],
   "author": "",
