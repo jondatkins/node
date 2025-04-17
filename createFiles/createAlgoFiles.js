@@ -29,7 +29,6 @@ async function readFile() {
 }
 
 async function writeFile() {
-  // let fileInfo = await readFile();
   let fileName = process.argv[2];
   let sourceFilePath = "/home/jon/Projects/Node/algorithms/modules";
   let testFilePath = "/home/jon/Projects/Node/algorithms/tests"
@@ -46,7 +45,6 @@ async function writeFile() {
   let testFileTemplateBegin = `const ${fileName} = require('../modules/${fileName}')`;
 
   let testFileFunc = `test('', () => {`;
-  // expect( ${fileName}.${fileName}()).toBe(true)
   let testFileTemplateEnd = "})";
 
   try {
