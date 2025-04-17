@@ -9,6 +9,9 @@ let testFilePath = "../algorithms/tests/"
 let fileName = process.argv[2];
 console.log('foo')
 
+function test() {
+  console.log('xxx')
+}
 // const validAnagram = (str1, str2) => {
 // Create files for Udemy Algorithms course
 async function createFile() {
@@ -75,5 +78,6 @@ async function readTestData() {
   }
   return fileArray2;
 }
-console.log('tet')
-createFile();
+// createFile();
+// test();
+// readTestData();
