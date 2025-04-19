@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "jest ./tests/findPair.test.js"
+    "test": "jest ./tests/findPair2.test.js"
   },
   "keywords": [],
   "author": "",
