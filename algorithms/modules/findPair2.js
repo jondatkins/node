@@ -1,6 +1,7 @@
 // multi pointer version
 const findPair2 = (arrayOfInts, num) => {
   if (arrayOfInts < 2) {
+    console.log(`No match for ${arrayOfInts} when looking for diff of ${num}`)
     return false;
   }
   arrayOfInts.sort((a, b) => {
