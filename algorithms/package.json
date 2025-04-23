@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "jest ./tests/findPair2.test.js"
+    "test": "jest ./tests/minSubArrayLen.test.js"
   },
   "keywords": [],
   "author": "",

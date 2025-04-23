@@ -1,43 +1,8 @@
-// Count the unique values in a sorted array, and return that value
-const maxSubarraySum = (intArray, numConsecElems) => {
-  if (intArray.length === 0) {
-    return null;
-  }
-  let i = 0;
-  let max = 0;
-  while (i + numConsecElems - 1 < intArray.length) {
-    let newMax = 0;
-    for (let j = i; j < i + numConsecElems; j++) {
-      newMax += intArray[j];
-    }
-    if (newMax > max) {
-      max = newMax;
-    }
-    i++;
-  }
-  return max;
-}
 
-// Count the unique values in a sorted array, and return that value
-const maxSubarraySum2 = (intArray, num) => {
-  if (num > intArray.length) {
-    return null;
-  }
-  let max = -Infinity;
-  for (let i = 0; i < intArray.length - num + 1; i++) {
-    temp = 0;
-    for (let j = 0; j < num; j++) {
-      temp += intArray[i + j];
-    }
-    if (temp > max) {
-      max = temp;
-    }
-  }
-  return max;
-}
-
-// Solution from course.
-function maxSubarraySum3(arr, num) {
+// Given an array of integers and a number, write a function called 
+// maxSubarraySum, which finds the maximum sum of a subarray with 
+// the length of the number passed to the function.
+function maxSubarraySum(arr, num) {
   let maxSum = 0;
   let tempSum = 0;
   if (arr.length < num) return null;
@@ -51,7 +16,9 @@ function maxSubarraySum3(arr, num) {
   }
   return maxSum;
 }
-
-// maxSubarraySum([2, 6, 9, 2, 1, 8, 5, 6, 3], 3)
-
-module.exports = { maxSubarraySum, maxSubarraySum2, maxSubarraySum3 };
+console.log(maxSubarraySum([100, 200, 300, 400], 2)) // 700; 
+console.log(maxSubarraySum([1, 4, 2, 10, 23, 3, 1, 0, 20], 4)) // 39; 
+console.log(maxSubarraySum([-3, 4, 0, -2, 6, -1], 2)) // 5; 
+console.log(maxSubarraySum([3, -2, 7, -4, 1, -1, 4, -2, 1], 2)) // 5; 
+console.log(maxSubarraySum([2, 3], 3)) // null; 
+module.exports = { maxSubarraySum };
