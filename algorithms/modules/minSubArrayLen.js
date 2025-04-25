@@ -22,6 +22,9 @@ const minSubArrayLen = (intArray, num) => {
     else {
       end++;
       tempSum += intArray[end];
+      // If 'end' has reached the end of the array, and
+      // 'start' is still at the start; I know that I have
+      // not found a subarray, so assign 0 or just return 0 here.
       if (end === intArray.length && start === 0) {
         subarrayLength = 0;
       }
