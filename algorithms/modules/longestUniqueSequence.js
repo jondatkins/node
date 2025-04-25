@@ -28,6 +28,6 @@ const maxUniqueCharacters = (testString) => {
   return max;
 }
 
-maxUniqueCharacters("hellothereaxzypms");
+console.log(maxUniqueCharacters("hellothereaxzypms"));
 
 module.exports = { maxUniqueCharacters };

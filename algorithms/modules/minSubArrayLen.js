@@ -8,13 +8,18 @@ const minSubArrayLen = (intArray, num) => {
   for (let i = 0; i < intArray.length; i++) {
     tempSum += intArray[i];
     if (tempSum >= num) {
-      minLength = i + 1;
+      minLength = i;
       break;
     }
   }
-  for (let i = 0; i < intArray.length; i++) {
+  for (let i = minLength; i < intArray.length; i++) {
     // loop stuff here
 
+    tempSum = tempSum - intArray[i - minLength];
+    tempSum += intArray[i];
+    if (tempSum >= num && i + 1 < minLength) {
+      minLength = i + 1;
+    }
   }
   return minLength;
 }
