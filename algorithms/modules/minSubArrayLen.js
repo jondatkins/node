@@ -4,11 +4,10 @@
 // there isn't one, return 0 instead.
 const minSubArrayLen = (intArray, num) => {
   let tempSum = intArray[0];
-  let subarrayLength = intArray.length;
-  let minLength = 0;
+  let subarrayLength = intArray.length + 1;
   let start = 0;
   let end = 0;
-  while (start < intArray.length && end < intArray.length) {
+  while (end < intArray.length) {
     if (tempSum >= num) {
       let tempSubarrayLength = end - start + 1;
       subarrayLength = Math.min(tempSubarrayLength, subarrayLength);
@@ -22,13 +21,10 @@ const minSubArrayLen = (intArray, num) => {
     else {
       end++;
       tempSum += intArray[end];
-      // If 'end' has reached the end of the array, and
-      // 'start' is still at the start; I know that I have
-      // not found a subarray, so assign 0 or just return 0 here.
-      if (end === intArray.length && start === 0) {
-        subarrayLength = 0;
-      }
     }
+  }
+  if (subarrayLength === intArray.length + 1) {
+    return 0;
   }
   return subarrayLength;
 }
@@ -38,11 +34,6 @@ const minSubArrayLen = (intArray, num) => {
 // console.log(minSubArrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 39)) // 3; 
 // console.log(minSubArrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 55)) // 5; 
 // console.log(minSubArrayLen([4, 3, 3, 8, 1, 2, 3], 11)) // 2; 
-console.log(minSubArrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 95)) // 0; 
+// console.log(minSubArrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 95)) // 0; 
 
-const printArray = (anArray, start, end) => {
-  for (let i = start; i < end; i++) {
-    console.log(anArray[i]);
-  }
-}
 module.exports = { minSubArrayLen };
