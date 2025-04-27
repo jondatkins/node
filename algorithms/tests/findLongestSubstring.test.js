@@ -1,23 +1,23 @@
 const findLongestSubstring = require('../modules/findLongestSubstring')
 
-test('', () => {
+test('0 length string, so expect 0', () => {
   expect(findLongestSubstring.findLongestSubstring('')).toBe(0)
 })
-test('', () => {
+test('rithmsc is the longest substring, so 7', () => {
   expect(findLongestSubstring.findLongestSubstring('rithmschool')).toBe(7)
 })
-test('', () => {
+test('isawesom is the substring, so 6', () => {
   expect(findLongestSubstring.findLongestSubstring('thisisawesome')).toBe(6)
 })
-test('', () => {
+test('hecatin is the substring, so 7', () => {
   expect(findLongestSubstring.findLongestSubstring('thecatinthehat')).toBe(7)
 })
-test('', () => {
+test(`All b's, so 1`, () => {
   expect(findLongestSubstring.findLongestSubstring('bbbbbb')).toBe(1)
 })
-test('', () => {
+test('ubstring is the substring, so 8', () => {
   expect(findLongestSubstring.findLongestSubstring('longestsubstring')).toBe(8)
 })
-test('', () => {
+test('wedoit is the substring, so 6', () => {
   expect(findLongestSubstring.findLongestSubstring('thisishowwedoit')).toBe(6)
 })
