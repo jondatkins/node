@@ -1,4 +1,4 @@
-const findLongestSubstring = require('../modules/findLongestSubstring')
+const findLongestSubstring = require('../modules/findLongestSubstring2')
 
 test('0 length string, so expect 0', () => {
   expect(findLongestSubstring.findLongestSubstring('')).toBe(0)
