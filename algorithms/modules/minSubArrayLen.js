@@ -23,10 +23,11 @@ const minSubArrayLen = (intArray, num) => {
       tempSum += intArray[end];
     }
   }
-  if (subarrayLength === intArray.length + 1) {
-    return 0;
-  }
-  return subarrayLength;
+  // if (subarrayLength === intArray.length + 1) {
+  //   return 0;
+  // }
+  return subarrayLength === intArray.length + 1 ? 0 : subarrayLength;
+  // return subarrayLength;
 }
 // console.log(minSubArrayLen([2, 3, 1, 2, 4, 3], 7)) // 2 -> because [4,3] is the smallest subarray; 
 // console.log(minSubArrayLen([2, 1, 6, 5, 4], 9)) // 2 -> because [5,4] is the smallest subarray; 

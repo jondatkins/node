@@ -29,7 +29,7 @@ const findLongestSubstring = (someString) => {
     let tempLength = end - start;
     maxLength = Math.max(maxLength, tempLength);
   }
-  console.log('For string %s loop count is %s', someString, loopCount);
+  // console.log('For string %s loop count is %s', someString, loopCount);
   return maxLength;
 }
 console.log(findLongestSubstring('')) // 0; 
