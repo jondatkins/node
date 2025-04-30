@@ -1,0 +1,38 @@
+
+const printObject = (someObject) => {
+  for (let key in someObject) {
+    console.log('char is %s, index is %i', key, someObject[key]);
+  }
+}
+
+const findLongestSubstring = (someString) => {
+  let start = 0;
+  let end = 0;
+  let maxLength = 0;
+  let loopCount = 0;
+  // let uniqueChars = new Set();
+  let charIndices = {};
+  while (end < someString.length) {
+    loopCount++;
+    let char = someString[end];
+    // Add character to set if it isn't there already, and increment
+    // end pointer.
+    if (charIndices[char]) {
+      start = Math.max(start, charIndices[char]);
+    }
+    charIndices[char] = end + 1;
+    let tempLength = end - start + 1;
+    maxLength = Math.max(maxLength, tempLength);
+    end++;
+  }
+  // console.log('For string %s loop count is %s', someString, loopCount);
+  return maxLength;
+}
+// console.log(findLongestSubstring('')) // 0; 
+// console.log(findLongestSubstring('rithmschool')) // 7; 
+console.log(findLongestSubstring('thisisawesome')) // 6; 
+// console.log(findLongestSubstring('thecatinthehat')) // 7; 
+// console.log(findLongestSubstring('bbbbbb')) // 1; 
+// console.log(findLongestSubstring('longestsubstring')) // 8; 
+// console.log(findLongestSubstring('thisishowwedoit')) // 6; 
+module.exports = { findLongestSubstring };
