@@ -5,11 +5,13 @@ const fs = require('node:fs/promises');
 // findPair([6, 1, 4, 10, 2, 4], 2) // true
 async function readFile() {
   let fileName = process.argv[2];
+  let userName = process.env.USER;
+  // console.log(`user name is ${userName}`)
   // The second file array, once the file has been read and processed
   let fileArray2 = [];
   try {
 
-    let testDataDir = "/home/jon/Projects/Node/algorithms/testData"
+    let testDataDir = `/home/${userName}/Projects/Node/algorithms/testData`
     const data = await fs.readFile(`${testDataDir}/${fileName}.js`, { encoding: 'utf8' });
     // Read each line in the file into an array
     let fileArray = data.split(/\r?\n/);
@@ -39,12 +41,13 @@ async function readFile() {
 // results.
 async function writeFile() {
   let fileName = process.argv[2];
+  let userName = process.env.USER;
   if (!fileName) {
     console.log("please provide a file name.")
     return;
   }
-  let sourceFilePath = "/home/jon/Projects/Node/algorithms/modules";
-  let testFilePath = "/home/jon/Projects/Node/algorithms/tests"
+  let sourceFilePath = `/home/${userName}/Projects/Node/algorithms/modules`;
+  let testFilePath = `/home/${userName}/Projects/Node/algorithms/tests`
   let srcFileTemplateBegin = `const ${fileName} = () => {
       return true;
     }`;
