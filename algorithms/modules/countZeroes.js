@@ -23,11 +23,11 @@ const countZeroes = (arrayOnesZeroes) => {
       }
       else if (left === 1 && right === 1) {
         // search upper range, so set low to mid + 1
-        // if (mid + 1 === arrayOnesZeroes.length - 1) {
-        //   // mid +1 is the right hand index, so if this is the last element
-        //   // the array must be all 1s, so return 0
-        //   return 0;
-        // }
+        if (mid + 1 === arrayOnesZeroes.length - 1) {
+          // mid +1 is the right hand index, so if this is the last element
+          // the array must be all 1s, so return 0
+          return 0;
+        }
         low = mid + 1;
       }
       else {
@@ -38,14 +38,6 @@ const countZeroes = (arrayOnesZeroes) => {
         }
         // Both 0s here, so
         high = mid - 1;
-      }
-    }
-    else {
-      // mid is at the end of the array here
-      if (arrayOnesZeroes[mid] === 1) {
-        console.log(`here`);
-        // return arrayOnesZeroes.length - 1;
-        return 0;
       }
     }
   }
