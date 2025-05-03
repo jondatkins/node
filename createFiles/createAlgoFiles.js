@@ -56,7 +56,7 @@ async function writeFile() {
 
   let testFileTemplateBegin = `const ${fileName} = require('../modules/${fileName}')\n`;
 
-  let testFileFunc = `test('', () => {`;
+  let testFileFunc = `test(\`testDescription\`, () => {`;
   let testFileTemplateEnd = "})";
 
   try {

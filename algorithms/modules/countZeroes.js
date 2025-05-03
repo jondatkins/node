@@ -1,12 +1,4 @@
 const countZeroes = (arrayOnesZeroes) => {
-  // If the array starts with 0, we know it's all 0s.
-  // if (arrayOnesZeroes[0] === 0) {
-  //   return arrayOnesZeroes.length;
-  // }
-  // If the final value is 1, it must all be 1s, so no 0s.
-  // else if (arrayOnesZeroes[arrayOnesZeroes.length - 1] === 1) {
-  //   return 0;
-  // }
   let mid = 0;
   let low = 0;
   let high = Math.trunc(arrayOnesZeroes.length - 1);
@@ -15,7 +7,6 @@ const countZeroes = (arrayOnesZeroes) => {
   while (low <= high) {
     mid = Math.floor((high + low) / 2);
     if (mid < arrayOnesZeroes.length - 1) {
-
       left = arrayOnesZeroes[mid];
       right = arrayOnesZeroes[mid + 1];
       if (left === 1 && right === 0) {
