@@ -27,6 +27,7 @@ const getFirstIndex = (nums, num) => {
     }
     if (left < num && right == num) {
       // return right index, this is the first index we're looking for
+      console.log(`got here 1`);
       return mid + 1;
     }
     // to look for the first index
@@ -52,6 +53,7 @@ const getFirstIndex = (nums, num) => {
     // if left is our number, but right is greater, this is the second index
     else {
       // left == num && right > num
+      console.log(`final else 1`);
       high = mid - 1;
     }
   }
@@ -77,6 +79,7 @@ const getLastIndex = (nums, num) => {
     }
     if (left === num && right > num) {
       // return left index, this is the last index we're looking for
+      console.log(`got here 2`);
       return mid;
     }
     // to look for the last index
@@ -103,6 +106,7 @@ const getLastIndex = (nums, num) => {
     else {
       // left == num && right > num
       // high = mid - 1;
+      console.log(`final else 2`);
       return mid + 1;
     }
   }
@@ -110,7 +114,7 @@ const getLastIndex = (nums, num) => {
 }
 // expect '2' for first index
 // expect '5' for last index
-// console.log(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 2)) // 4; 
+console.log(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 2)) // 4; 
 // expect '6' for first index
 // expect '6' for last index
 // console.log(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 3)) // 1; 
