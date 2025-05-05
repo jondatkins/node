@@ -5,6 +5,7 @@ const sortedFrequency = (nums, num) => {
   //   return -1;
   // }
   // return lastIndex - firstIndex + 1;
+  console.log(`${nums} array ${num} sub-array`);
   return (firstIndex === -1 || lastIndex === -1) ? -1 : lastIndex - firstIndex + 1;
 }
 
@@ -102,10 +103,8 @@ const getLastIndex = (nums, num) => {
       // we're in the sub-array, so look at higher range
       low = mid + 1;
     }
-    // if left is our number, but right is greater, this is the second index
+    // left is less than num, but right is equal to num, so return index of right
     else {
-      // left == num && right > num
-      // high = mid - 1;
       console.log(`final else 2`);
       return mid + 1;
     }
@@ -117,11 +116,11 @@ const getLastIndex = (nums, num) => {
 console.log(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 2)) // 4; 
 // expect '6' for first index
 // expect '6' for last index
-// console.log(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 3)) // 1; 
+console.log(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 3)) // 1; 
 // expect '0' for first index
 // expect '1' for last index
-// console.log(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 1)) // 2; 
+console.log(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 1)) // 2; 
 // 4 is not in this array, so first index is -1
 // 4 is not in this array, so last index is -1
-// console.log(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 4)) // -1; 
+console.log(sortedFrequency([1, 1, 2, 2, 2, 2, 3], 4)) // -1; 
 module.exports = { sortedFrequency };
