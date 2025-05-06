@@ -11,8 +11,7 @@ const getFirstIndex = (nums, num) => {
   let high = Math.trunc(nums.length - 1);
   let left = -1;
   let right = -1;
-  let firstIndex = -1;
-  let lastIndex = -1;
+
   while (low <= high) {
     mid = Math.floor((high + low) / 2);
     left = nums[mid];
@@ -22,7 +21,11 @@ const getFirstIndex = (nums, num) => {
       // reached end of array without finding first index
       return -1;
     }
-    if (left < num && right == num) {
+    // subarray is at beginning of array
+    else if (mid === 0 && left === num) {
+      return 0;
+    }
+    else if (left < num && right == num) {
       // return right index, this is the first index we're looking for
       return mid + 1;
     }
@@ -40,20 +43,11 @@ const getFirstIndex = (nums, num) => {
     }
     // check if left and right are equal to num
     else if (left == num && right == num) {
-      // We could be at beginning of array
-      if (mid == 0) {
-        return 0;
-      }
       // we're in the sub-array, so look at lower range
       high = mid - 1;
     }
     // left is our number, and right is greater here.
     else {
-      // left == num && right > num
-      if (mid === 0) {
-        // we've reached the beginning of the array, so just return 0
-        return 0;
-      }
       high = mid - 1;
     }
   }
@@ -81,7 +75,7 @@ const getLastIndex = (nums, num) => {
       }
       return -1;
     }
-    if (left === num && right > num) {
+    else if (left === num && right > num) {
       // return left index, this is the last index we're looking for
       return mid;
     }
