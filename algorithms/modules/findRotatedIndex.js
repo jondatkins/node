@@ -10,41 +10,19 @@ const findRotatedIndex = (numList, num) => {
 
 const findPivot = (numList) => {
   // binary search for beginning of rotated array
-  let mid = Math.trunc(numList.length / 2);
   let low = 0;
   let high = numList.length - 1;
-  let left = -1;
-  let right = -1;
-  let midValue = -1;
   while (low <= high) {
-    left = numList[low];
-    right = numList[high];
-    midValue = numList[mid];
-    if (low === high - 1) {
-      if (left < midValue) {
-        return mid;
-      }
-      else if (right > midValue) {
-        return mid;
-      }
-    }
-    if (right > midValue) {
-      if (low === high - 1) {
-        return mid;
-      }
+    let mid = Math.trunc(low + high / 2);
+    if (numList[mid] > numList[high]) {
+      // pivot is to right of mid
       low = mid + 1;
     }
-    else if (right < midValue) {
-      high = mid - 1;
+    else if (numList[mid] <= numList[high]) {
+      high = mid;
     }
-
-    // if(left > right){
-    //   return mid+1;
-    // }
-
   }
-  return -1;
-
+  return low;
 }
 
 console.log(findPivot([3, 4, 1, 2], 4)) // 1; 
