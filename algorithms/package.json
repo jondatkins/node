@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "jest ./tests/findRotatedIndex.test.js"
+    "test": "jest ./tests/findRotatedIndexFindPivot.test.js"
   },
   "keywords": [],
   "author": "",
