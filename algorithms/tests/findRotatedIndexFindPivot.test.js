@@ -1,4 +1,4 @@
-const findRotatedIndex = require('../modules/findRotatedIndex')
+const findRotatedIndex = require('../modules/findRotatedIndexOld')
 
 test(`testDescription`, () => {
   expect(findRotatedIndex.findPivot([3, 4, 1, 2], 4)).toBe(2)

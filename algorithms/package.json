@@ -8,13 +8,17 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "jest ./tests/findRotatedIndexFindPivot.test.js"
+    "test": "jest ./tests/countZeroes.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@babel/core": "^7.27.1",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-typescript": "^7.27.1",
+    "babel-jest": "^29.7.0",
     "jest": "^29.7.0"
   },
   "dependencies": {
