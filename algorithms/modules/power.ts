@@ -2,9 +2,6 @@ const power = (base: number, exponent: number) => {
   if (exponent === 0) {
     return 1;
   }
-  if (exponent === 1) {
-    return base;
-  }
   return power(base, exponent - 1) * base;
 }
 console.log(power(2, 2)) // 4; 
