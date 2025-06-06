@@ -14,8 +14,13 @@ const isPalindrome = (possiblePalindrome: string) => {
 }
 
 console.log(isPalindrome('awesome')) // false; 
+console.log('should be false')
 console.log(isPalindrome('foobar')) // false; 
+console.log('should be false')
 console.log(isPalindrome('tacocat')) // true; 
+console.log('should be true')
 console.log(isPalindrome('amanaplanacanalpanama')) // true; 
+console.log('should be true')
 console.log(isPalindrome('amanaplanacanalpandemonium')) // false; 
+console.log('should be false')
 module.exports = { isPalindrome };
