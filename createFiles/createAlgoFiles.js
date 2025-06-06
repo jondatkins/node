@@ -69,7 +69,7 @@ async function writeFile() {
     })
     let fileString = srcFileTemplateBegin + "\n" + funcCallString + srcFileTemplateEnd;
     let testString = testFileTemplateBegin + "\n" + testCallString;
-    await fs.writeFile(sourceFilePath + `/${fileName}.js`, fileString);
+    await fs.writeFile(sourceFilePath + `/${fileName}.ts`, fileString);
     await fs.writeFile(testFilePath + `/${fileName}.test.js`, testString);
   } catch (err) {
     console.log(err);
