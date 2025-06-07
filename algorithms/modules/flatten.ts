@@ -1,22 +1,14 @@
-const flatten = (array: any) => {
-  // if (array.length === 1 && !Array.isArray(array)) {
-  if (array.length === 1) {
-    if (!Array.isArray(array)) {
-      return array[0];
-    }
-    else {
-      return flatHelper(array);
-    }
-  }
-  return flatHelper(array);
+// const flatten = (array: any): number[] => {
+//   return array.reduce((acc, val) => {
+//     return Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val);
+//   })
+// }
+function flatten(arr) {
+  return arr.reduce((acc, val) => {
+    return Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val);
+  })
 }
 
-const flatHelper = (array) => {
-  let firstElem = flatten([array[0]]);
-  let restOfArray = array.splice(1);
-  let flatRest = flatten(restOfArray);
-  return [...firstElem, ...flatRest];
-}
 console.log(flatten([1, 2, 3, [4, 5]])) // [1, 2, 3, 4, 5]; 
 // console.log(flatten([1, [2, [3, 4], [[5]]]])) // [1, 2, 3, 4, 5]; 
 // console.log(flatten([[1], [2], [3]])) // [1,2,3]; 
