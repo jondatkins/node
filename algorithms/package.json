@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "test": "jest ./tests/flatten.test.js"
+    "test": "jest ./tests/capitalizeFirst.test.js"
   },
   "keywords": [],
   "author": "",

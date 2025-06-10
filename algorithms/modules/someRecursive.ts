@@ -1,10 +1,10 @@
 interface myCallbackType { (myArgument: number): boolean }
 
-const isOdd = val => val % 2 !== 0;
+const isOdd = (val: number): boolean => val % 2 !== 0;
 
 const someRecursive = (numArray: number[], callback: myCallbackType) => {
-  if (numArray.length === 1) {
-    return callback(numArray[0]);
+  if (numArray.length === 0) {
+    return false;
   }
   if (callback(numArray[0])) {
     return true;

@@ -1,14 +1,12 @@
-const isPalindrome = (possiblePalindrome: string) => {
-  if (possiblePalindrome.length === 0) {
+const isPalindrome = (str: string) => {
+  if (str.length === 1) {
     return true;
   }
-
-  let startChar = possiblePalindrome.charAt(0);
-  let endChar = possiblePalindrome.charAt(possiblePalindrome.length - 1);
-  possiblePalindrome = possiblePalindrome.slice(1, -1);
-
-  if (startChar === endChar && isPalindrome(possiblePalindrome)) {
-    return true;
+  if (str.length === 2) {
+    return str[0] === str[1];
+  }
+  if (str[0] === str.slice(-1)) {
+    return isPalindrome(str.slice(1, -1))
   }
   return false;
 }
