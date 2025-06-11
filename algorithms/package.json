@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node ./index.js",
-    "test": "jest ./tests/capitalizeFirst.test.js"
+    "start": "node --disable-warning=ExperimentalWarning ./modules/nestedEvenSum.ts",
+    "test": "jest ./tests/nestedEvenSum.test.js"
   },
   "keywords": [],
   "author": "",
