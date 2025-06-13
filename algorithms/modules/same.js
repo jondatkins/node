@@ -72,4 +72,7 @@ const same4 = (array1, array2) => {
   return true;
 }
 
+console.log(same4([1, 2, 3], [4, 1, 9])) // true
+console.log(same4([1, 2, 3], [1, 9])) // false
+console.log(same4([1, 2, 1], [4, 4, 1]))// false
 module.exports = { same, same2, same3, same4 };
