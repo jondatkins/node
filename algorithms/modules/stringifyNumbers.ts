@@ -10,30 +10,35 @@ let obj = {
   }
 }
 
-
-
 const stringifyNumbers = (anObj: any): any => {
-  let newObject = {};
-  function helper(obj: any): any {
-    for (const [key, value] of Object.entries(obj)) {
-      if (isObject(value)) {
-        helper(value);
+  var newObject: Record<string, any> = {}
+  for (const [key, value] of Object.entries(anObj)) {
+    // If it's an array, just do a shallow copy
+    if (Array.isArray(value)) {
+      newObject[key] = [...value];
+    }
+    // If it's an object, do the recursive call
+    else if (isObject(value)) {
+      newObject[key] = stringifyNumbers(value);
+    }
+    // If it's a primitive, add it to our new object.
+    else {
+      if (typeof value === 'number') {
+        newObject[key] = value.toString();
       }
       else {
-        if (typeof value === 'number') {
-          // evenSum += value;
-          let StringNum = '' + value;
-          newObject[key] = StringNum;
-        }
+        newObject[key] = value;
       }
     }
-    return newObject;
   }
-  return helper(obj);
+  return newObject;
 }
 
 function isObject(obj: any): boolean {
   return obj === Object(obj);
 }
+console.log(obj);
 console.log(stringifyNumbers(obj));
+// Obj should not have changed here.
+console.log(obj);
 module.exports = { stringifyNumbers };
