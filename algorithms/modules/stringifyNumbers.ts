@@ -10,28 +10,22 @@ let obj = {
   }
 }
 
-const stringifyNumbers = (anObj: any): any => {
-  var newObject: Record<string, any> = {}
-  for (const [key, value] of Object.entries(anObj)) {
-    // If it's an array, just do a shallow copy
-    if (Array.isArray(value)) {
-      newObject[key] = [...value];
-    }
-    // If it's an object, do the recursive call
-    else if (isObject(value)) {
-      newObject[key] = stringifyNumbers(value);
-    }
-    // If it's a primitive, add it to our new object.
-    else {
-      if (typeof value === 'number') {
-        newObject[key] = value.toString();
-      }
-      else {
-        newObject[key] = value;
-      }
+const access = (str: keyof typeof obj) => {
+  return obj[str];
+};
+
+function stringifyNumbers(obj: any): any {
+  var newObj: Record<string, any> = {}
+  for (var key in obj) {
+    if (typeof obj[key] === 'number') {
+      newObj[key] = obj[key].toString();
+    } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+      newObj[key] = stringifyNumbers(obj[key]);
+    } else {
+      newObj[key] = obj[key];
     }
   }
-  return newObject;
+  return newObj;
 }
 
 function isObject(obj: any): boolean {

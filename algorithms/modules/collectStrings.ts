@@ -1,4 +1,3 @@
-
 const obj = {
   stuff: "foo",
   data: {
@@ -17,18 +16,17 @@ const obj = {
 
 const collectStrings = (anObj: any) => {
   let strArray: string[] = [];
-  for (const [key, value] of Object.entries(anObj)) {
+  for (var key in anObj)
     // If it's an object, do the recursive call
-    if (isObject(value)) {
-      strArray = [...strArray, ...collectStrings(value)];
+    if (isObject(anObj[key])) {
+      strArray = [...strArray, ...collectStrings(anObj[key])];
     }
     // If it's a string, add it to our new array.
     else {
-      if (typeof value === 'string') {
-        strArray.push(value);
+      if (typeof anObj[key] === 'string') {
+        strArray.push(anObj[key]);
       }
     }
-  }
   return strArray;
 }
 

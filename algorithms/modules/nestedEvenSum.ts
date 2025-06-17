@@ -18,26 +18,21 @@ var obj2 = {
   e: { e: { e: 2 }, ee: 'car' }
 };
 
-const nestedEvenSum = (obj: any): number => {
-  let evenSum = 0;
-  function helper(obj: any): number {
-    for (const [key, value] of Object.entries(obj)) {
-      if (isObject(value)) {
-        helper(value);
-      }
-      else {
-        if (typeof value === 'number' && value % 2 === 0) {
-          evenSum += value;
-        }
-      }
+const nestedEvenSum = (obj: any, sum: number = 0): number => {
+  for (var key in obj) {
+    // if (typeof obj[key] === 'object') {
+    if (isObject(obj[key])) {
+      sum += nestedEvenSum(obj[key]);
     }
-    return evenSum
+    else if (typeof obj[key] === 'number' && obj[key] % 2 === 0) {
+      sum += obj[key];
+    }
   }
-  return helper(obj);
+  return sum;
 }
 
 function isObject(obj: any): boolean {
-  return obj === Object(obj);
+  return typeof obj === 'object' && !Array.isArray(obj) && obj !== null
 }
 
 console.log(nestedEvenSum(obj1)) // 6; 
