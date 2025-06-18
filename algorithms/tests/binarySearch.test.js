@@ -1,31 +1,32 @@
-const binSearch = require('../modules/binarySearch');
+const binarySearch = require('../modules/binarySearch')
 
-test(`4 should be at index 3 for array 1,2,3,4,5,6`, () => {
-  expect(binSearch.binarySearch([1, 2, 3, 4, 5, 6], 4)).toEqual(3)
+test(`testDescription`, () => {
+  expect(binarySearch.binarySearch([1, 2, 3, 4, 5], 2)).toBe(1)
 })
-test(`6 should be at index 5 for array 1,2,3,4,5,6`, () => {
-  expect(binSearch.binarySearch([1, 2, 3, 4, 5, 6], 6)).toEqual(5)
+test(`testDescription`, () => {
+  expect(binarySearch.binarySearch([1, 2, 3, 4, 5], 3)).toBe(2)
 })
-test(`11 should be at index -1 for array 1,2,3,4,5,6`, () => {
-  expect(binSearch.binarySearch([1, 2, 3, 4, 5, 6], 11)).toEqual(-1)
+test(`testDescription`, () => {
+  expect(binarySearch.binarySearch([1, 2, 3, 4, 5], 5)).toBe(4)
 })
-test(`3 should be at index 2 for array 1,2,3,4,5,6`, () => {
-  expect(binSearch.binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)).toEqual(2)
+test(`testDescription`, () => {
+  expect(binarySearch.binarySearch([1, 2, 3, 4, 5], 6)).toBe(-1)
 })
-test(`7 should be at index 6 for array 1,2,3,4,5,6`, () => {
-  expect(binSearch.binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 7)).toEqual(6)
+test(`testDescription`, () => {
+  expect(binarySearch.binarySearch(
+    [5, 6, 10, 13, 14, 18, 30, 34, 35, 37,
+      40, 44, 64, 79, 84, 86, 95, 96, 98, 99]
+    , 10)).toBe(2)
 })
-test(`11 should be at index 10 for array 1,2,3,4,5,6`, () => {
-  expect(binSearch.binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 11)).toEqual(10)
+test(`testDescription`, () => {
+  expect(binarySearch.binarySearch(
+    [5, 6, 10, 13, 14, 18, 30, 34, 35, 37,
+      40, 44, 64, 79, 84, 86, 95, 96, 98, 99]
+    , 95)).toBe(16)
 })
-
-const testArray = [1, 2, 3, 4, 5, 6]
-test(`5 should be at index 4 for array 1,2,3,4,5,6`, () => {
-  expect(binSearch.findMe(testArray, 5, 0, testArray.length - 1)).toEqual(4)
-})
-test(`2 should be at index 1 for array 1,2,3,4,5,6`, () => {
-  expect(binSearch.findMe(testArray, 2, 0, testArray.length - 1)).toEqual(1)
-})
-test(`7 should be at index -1 for array 1,2,3,4,5,6`, () => {
-  expect(binSearch.findMe(testArray, 7, 0, testArray.length - 1)).toEqual(-1)
+test(`testDescription`, () => {
+  expect(binarySearch.binarySearch(
+    5, 6, 10, 13, 14, 18, 30, 34, 35, 37,
+    40, 44, 64, 79, 84, 86, 95, 96, 98, 99
+    , 100)).toBe(-1)
 })

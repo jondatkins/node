@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/capitalizeFirstCourse.js",
-    "test": "jest ./tests/collectStrings.test.js"
+    "start": "node --disable-warning=ExperimentalWarning ./modules/binarySearch.ts",
+    "test": "jest ./tests/binarySearch.test.js"
   },
   "keywords": [],
   "author": "",
