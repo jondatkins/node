@@ -1,4 +1,4 @@
-const binarySearch = require('../modules/binarySearch')
+const binarySearch = require('../modules/binarySearchRecursive')
 
 test(`testDescription`, () => {
   expect(binarySearch.binarySearch([1, 2, 3, 4, 5], 2)).toBe(1)

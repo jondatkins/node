@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/binarySearch.ts",
+    "start": "node --disable-warning=ExperimentalWarning ./modules/binarySearchRecursive.ts",
     "test": "jest ./tests/binarySearch.test.js"
   },
   "keywords": [],
