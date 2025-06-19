@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
+    "node": "^24.2.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }

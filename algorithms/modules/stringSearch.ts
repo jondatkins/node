@@ -1,7 +1,11 @@
 const stringSearch = (str: string, subStr: string) => {
   for (let i = 0; i < str.length; i++) {
-    for (let i = 0; i < subStr.length; i++) {
-      // loop stuff here
+    if (subStr[0] === str[i]) {
+      console.log(`${subStr[0]} matches ${str[i]}`);
+
+      for (let j = 0; j < subStr.length; j++) {
+
+      }
     }
   }
 }
