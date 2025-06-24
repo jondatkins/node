@@ -1,15 +1,25 @@
 const stringSearch = (str: string, subStr: string) => {
-  for (let i = 0; i < str.length; i++) {
-    if (subStr[0] === str[i]) {
-      console.log(`${subStr[0]} matches ${str[i]}`);
+  let matchCount = 0;
 
-      for (let j = 1; j < subStr.length; j++) {
-        if (subStr[j] === str[i + j]) {
-          console.log(`substring j is ${subStr[j]} string i + j is ${str[i + j]}`)
+  for (let i = 0; i < str.length; i++) {
+
+    if (subStr[0] === str[i]) {
+      let j = 1;
+
+      while (j < subStr.length && i + j < str.length) {
+        if (subStr[j] !== str[i + j]) {
+          break;
         }
+
+        if (j === subStr.length - 1) {
+          matchCount++;
+        }
+        j++;
       }
     }
   }
+  return matchCount;
 }
 console.log(stringSearch("wowomgzomg", "omg")) // 2; 
+console.log(stringSearch("wowomgzom", "omg")) // 1; 
 module.exports = { stringSearch };
