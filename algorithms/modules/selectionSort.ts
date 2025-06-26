@@ -1,13 +1,14 @@
 const selectionSort = (arr: number[]): number[] => {
   for (let i = 0; i < arr.length; i++) {
     let min = i;
-    // let newMin = i;
     for (let j = i + 1; j < arr.length; j++) {
       if (arr[j] < arr[min]) {
         min = j;
       }
     }
-    swap(arr, i, min);
+    if (i !== min) {
+      swap(arr, i, min);
+    }
   }
   return arr;
 }
