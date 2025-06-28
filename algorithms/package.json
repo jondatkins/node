@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/selectionSort2.ts",
-    "test": "jest ./tests/selectionSort2.test.js"
+    "start": "node --disable-warning=ExperimentalWarning ./modules/insertionSort.ts",
+    "test": "jest ./tests/insertionSort.test.js"
   },
   "keywords": [],
   "author": "",
