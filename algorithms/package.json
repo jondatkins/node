@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/insertionSort.ts",
+    "start": "node --disable-warning=ExperimentalWarning ./modules/insertionSort2.ts",
     "test": "jest ./tests/insertionSort.test.js"
   },
   "keywords": [],
