@@ -67,7 +67,7 @@ async function writeFile() {
     let testCallString = "";
     testDataArray.forEach((funcCall) => {
       funcCallString += `console.log(${funcCall[0]}) \/\/ ${funcCall[1]}; \n`
-      testCallString += testFileFunc + `\nexpect( ${fileName}.${funcCall[0]}).toBe(${funcCall[1]})\n` + testFileTemplateEnd + "\n";
+      testCallString += testFileFunc + `\nexpect( ${fileName}.${funcCall[0]}).toEqual(${funcCall[1]})\n` + testFileTemplateEnd + "\n";
     })
     let fileString = srcFileTemplateBegin + "\n" + funcCallString + srcFileTemplateEnd;
     let testString = testFileTemplateBegin + "\n" + testCallString;

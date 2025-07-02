@@ -1,5 +1,12 @@
 const { performance } = require('perf_hooks');
 
+type CallBackFunc = (a: any, b: any) => number;
+
+interface Person {
+  name: string;
+  age: number;
+}
+
 const bubbleSort2 = <Type>(arr: Type[], callback?: CallBackFunc): Type[] => {
   var noSwap;
   for (let i = arr.length - 1; i > 0; i--) {
@@ -56,12 +63,6 @@ var moarKittyData = [{
   age: 6
 }];
 
-type CallBackFunc = (a: any, b: any) => number;
-
-interface Person {
-  name: string;
-  age: number;
-}
 function oldestToYoungest(a: Person, b: Person) {
   return b.age - a.age;
 }
@@ -71,7 +72,7 @@ function randomArray(length: number): number[] {
   // map(Function.call, Math.random);
   return random;
 }
-var data: number[] = randomArray(999999999999999999);
+var data: number[] = randomArray(999999999999999);
 // console.log(data);
 const startTime = performance.now()
 
