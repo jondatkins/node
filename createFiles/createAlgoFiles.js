@@ -5,6 +5,7 @@ const fs = require('node:fs/promises');
 // findPair([6, 1, 4, 10, 2, 4], 2) // true
 async function readFile() {
   let fileName = process.argv[2];
+  let test = process.argv[3];
   let userName = process.env.USER;
   // console.log(`user name is ${userName}`)
   // The second file array, once the file has been read and processed
@@ -41,6 +42,7 @@ async function readFile() {
 // results.
 async function writeFile() {
   let fileName = process.argv[2];
+  let test = process.argv[3];
   let userName = process.env.USER;
   if (!fileName) {
     console.log("please provide a file name.")
@@ -69,8 +71,14 @@ async function writeFile() {
     })
     let fileString = srcFileTemplateBegin + "\n" + funcCallString + srcFileTemplateEnd;
     let testString = testFileTemplateBegin + "\n" + testCallString;
-    await fs.writeFile(sourceFilePath + `/${fileName}.ts`, fileString);
-    await fs.writeFile(testFilePath + `/${fileName}.test.js`, testString);
+    if (!test) {
+      await fs.writeFile(sourceFilePath + `/${fileName}.ts`, fileString);
+      await fs.writeFile(testFilePath + `/${fileName}.test.js`, testString);
+    }
+    else {
+
+      await fs.writeFile(testFilePath + `/${fileName}.test.js`, testString);
+    }
   } catch (err) {
     console.log(err);
   }

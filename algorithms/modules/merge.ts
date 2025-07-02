@@ -1,4 +1,4 @@
-const merge = (arr1: number[], arr2: number[]): number[] => {
+const mergeHelper = (arr1: number[], arr2: number[]): number[] => {
   let sortedArray: number[] = [];
   let i = 0, j = 0;
 
@@ -23,5 +23,12 @@ const merge = (arr1: number[], arr2: number[]): number[] => {
   }
   return sortedArray;
 }
-console.log(merge([1, 10, 50], [2, 14, 99, 100])) // [1,2,14,50,99,100]; 
-module.exports = { merge };
+
+function merge() {
+  // body of arrow function
+}
+
+console.log(mergeHelper([1, 10, 50], [2, 14, 99, 100])) // [1,2,14,50,99,100]; 
+console.log(mergeHelper([1, 10, 50, 77], [2, 8, 14, 99, 100])) // [1, 10, 2, 8,14,50,99,100]; 
+console.log(mergeHelper([1, 10, 50, 77], [14, 99, 100])) // [1, 10, 14,50,99,100]; 
+module.exports = { mergeHelper };
