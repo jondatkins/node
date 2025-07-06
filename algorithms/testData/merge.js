@@ -1,5 +1,7 @@
-mergeHelper([1, 10, 50], [2, 14, 99, 100]) // [1,2,10,14,50,99,100]                 
-mergeHelper([1, 10, 50, 77], [2, 8, 14, 99, 100]) // [1, 2,8,10,14,50,77,99,100]  
-mergeHelper([1, 10, 50, 77], [14, 99, 100]) // [1, 10, 14,50,77,99,100]             
-merge([5, 2, 9, 1]) // [1,2,5,9]               
-merge([22, 5, 13, 2, 9, 1]) // [1,2,5,9,13,22] 
+mergeSort([4, 20, 12, 10, 7, 9]); // [4, 7, 9, 10, 12, 20]
+mergeSort([0, -10, 7, 4]); // [-10, 0, 4, 7]
+mergeSort([1, 2, 3]); // [1, 2, 3]
+mergeSort([]);
+mergeSort(nums); // [2, 3, 3, 4, 4, 4, 5, 23, 32, 32, 34, 34, 35, 43, 67, 75, 232, 232, 453, 546, 4342]
+mergeSort(kitties, strComp); // ["Blue", "Garfield", "Grumpy", "Heathcliff", "LilBub"]
+mergeSort(moarKittyData, oldestToYoungest); // sorted by age in descending order
