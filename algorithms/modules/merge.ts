@@ -1,4 +1,3 @@
-
 type CallBackFunc = (a: any, b: any) => number;
 
 
