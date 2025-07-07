@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/merge.ts",
-    "test": "jest ./tests/merge.test.js"
+    "start": "node --disable-warning=ExperimentalWarning ./modules/pivotHelper.ts",
+    "test": "jest ./tests/pivotHelper.test.js"
   },
   "keywords": [],
   "author": "",
