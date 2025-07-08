@@ -1,1 +1,2 @@
-pivotHelper(arr1) // [3,7,1,9,44,8]
+pivotHelper(arr1) // 4
+pivotHelper(arr2) // 8
