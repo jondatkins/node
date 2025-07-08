@@ -43,17 +43,15 @@ let arr1 = [9, 3, 12, 7, 1, 44, 8]
 let arr2 = [22, -22, 9, 3, 12, 15, 99999, 7, 33, 1, 44, 8]
 let arr3 = [4, 8, 2, 1, 5, 7, 6, 3];
 let arr4 = [5, 2, 1, 8, 4, 7, 6, 3];
-// console.log(``);
 console.log(`unsorted: ${arr1}`);
-console.log(`sorted:   ${quickSort(arr1)}`) // [3,7,1,9,44,8]; 
-// console.log();
-// console.log(`unsorted: ${arr2}`);
-// console.log(`sorted:   ${quickSort(arr2)}`) // [3,7,1,9,44,8]; 
-// console.log();
-// console.log(`unsorted: ${arr3}`);
-// console.log(`sorted:   ${quickSort(arr3)}`) // [3,7,1,9,44,8]; 
-// console.log();
-// console.log(`unsorted: ${arr4}`);
-// console.log(`sorted:   ${quickSort(arr4)}`) // [3,7,1,9,44,8]; 
-// console.log();
+console.log(`sorted:   ${quickSort(arr1)}`)
+console.log();
+console.log(`unsorted: ${arr2}`);
+console.log(`sorted:   ${quickSort(arr2)}`)
+console.log();
+console.log(`unsorted: ${arr3}`);
+console.log(`sorted:   ${quickSort(arr3)}`)
+console.log();
+console.log(`unsorted: ${arr4}`);
+console.log(`sorted:   ${quickSort(arr4)}`)
 module.exports = { pivotHelper, quickSort };
