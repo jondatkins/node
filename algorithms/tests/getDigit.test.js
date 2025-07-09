@@ -30,3 +30,15 @@ test(`testDescription`, () => {
 test(`testDescription`, () => {
   expect(getDigit.digitCount(1)).toEqual(1)
 })
+test(`testDescription`, () => {
+  expect(getDigit.digitCount(0)).toEqual(1)
+})
+test(`testDescription`, () => {
+  expect(getDigit.mostDigits([1234, 56, 7])).toEqual(4)
+})
+test(`testDescription`, () => {
+  expect(getDigit.mostDigits([1, 1, 11111, 1])).toEqual(5)
+})
+test(`testDescription`, () => {
+  expect(getDigit.mostDigits([12, 34, 56, 78])).toEqual(2)
+})
