@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/quickSort.ts",
-    "test": "jest ./tests/quickSort.test.js"
+    "start": "node --disable-warning=ExperimentalWarning ./modules/getDigit.ts",
+    "test": "jest ./tests/getDigit.test.js"
   },
   "keywords": [],
   "author": "",

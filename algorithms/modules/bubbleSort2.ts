@@ -2,7 +2,7 @@ const { performance } = require('perf_hooks');
 
 type CallBackFunc = (a: any, b: any) => number;
 
-interface Person {
+interface Cat {
   name: string;
   age: number;
 }
@@ -63,7 +63,7 @@ var moarKittyData = [{
   age: 6
 }];
 
-function oldestToYoungest(a: Person, b: Person) {
+function oldestToYoungest(a: Cat, b: Cat) {
   return b.age - a.age;
 }
 function randomArray(length: number): number[] {

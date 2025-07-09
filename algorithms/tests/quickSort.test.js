@@ -1,8 +1,8 @@
 const quickSort = require('../modules/quickSort.ts')
 let arr1 = [9, 3, 12, 7, 1, 44, 8]
 let arr2 = [22, -22, 9, 3, 12, 15, 99999, 7, 33, 1, 44, 8]
-let pivotIndex1 = quickSort.pivotHelper(arr1);
-let pivotIndex2 = quickSort.pivotHelper(arr2);
+let pivotIndex1 = quickSort.pivot(arr1);
+let pivotIndex2 = quickSort.pivot(arr2);
 
 test(`pivot index for [9, 3, 12, 7, 1, 44, 8] should be 4`, () => {
   expect(pivotIndex1).toEqual(4)
