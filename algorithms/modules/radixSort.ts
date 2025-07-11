@@ -42,6 +42,20 @@ function radixSort(nums: number[]) {
   return nums;
 }
 
+function radixSort2(nums: number[]) {
+  let maxDigitCount = mostDigits(nums);
+
+  for (let k = 0; k < maxDigitCount; k++) {
+    let digitBuckets = Array.from({ length: 10 }, (): number[] => [])
+    for (let i = 0; i < nums.length; i++) {
+      let digit = getDigit(nums[i], k);
+      digitBuckets[digit].push(nums[i]);
+    }
+    nums = [].concat(...digitBuckets);
+  }
+  return nums;
+}
+
 function createBuckets(): number[][] {
   let buckets = [];
   for (let i = 0; i < 10; i++) {
@@ -50,9 +64,10 @@ function createBuckets(): number[][] {
   return buckets;
 }
 
-console.log(radixSort([1234, 56, 7])); // [7,56,1234]
-console.log(radixSort([100, 21, 9, 20009, 58])); // [9,21,58,100,20009] 
-console.log(radixSort([12, 78, 56, 34])); // [12, 34,56, 78]
+console.log(radixSort2([23, 345, 5467, 12, 2345, 9852]));
+// console.log(radixSort([1234, 56, 7])); // [7,56,1234]
+// console.log(radixSort([100, 21, 9, 20009, 58])); // [9,21,58,100,20009] 
+// console.log(radixSort([12, 78, 56, 34])); // [12, 34,56, 78]
 
 // console.log(mostDigits([1234, 56, 7])); // 4
 // console.log(mostDigits([1, 1, 11111, 1])); // 5
