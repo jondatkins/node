@@ -27,16 +27,15 @@ const mostDigits = (nums: number[]) => {
 //   place each number in the corresponding bucket based on the kthd digit.
 function radixSort(nums: number[]) {
   let maxDigits = mostDigits(nums);
-  let numMaxDigits = digitCount(maxDigits);
-  let buckets = createBuckets();
   for (let i = 0; i < maxDigits; i++) {
+    let buckets = createBuckets();
     for (let j = 0; j < nums.length; j++) {
       let num = nums[j];
       let digit = getDigit(num, i);
       buckets[digit].push(num);
     }
     nums = buckets.flat();
-    buckets = createBuckets();
+    // buckets = createBuckets();
 
   }
   return nums;
@@ -51,7 +50,10 @@ function radixSort2(nums: number[]) {
       let digit = getDigit(nums[i], k);
       digitBuckets[digit].push(nums[i]);
     }
-    nums = [].concat(...digitBuckets);
+    let flatArray: number[] = [];
+    nums = flatArray.concat(...digitBuckets);
+
+    // Argument of type 'number[]' is not assignable to parameter of type 'ConcatArray<never>'.
   }
   return nums;
 }
