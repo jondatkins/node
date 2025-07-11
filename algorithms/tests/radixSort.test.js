@@ -42,3 +42,6 @@ test(`testDescription`, () => {
 test(`testDescription`, () => {
   expect(radixSort.mostDigits([12, 34, 56, 78])).toEqual(2)
 })
+test(`testDescription`, () => {
+  expect(radixSort.mostDigits([])).toEqual(0)
+})

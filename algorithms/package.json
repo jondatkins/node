@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node --disable-warning=ExperimentalWarning ./modules/radixSort.ts",
-    "test": "jest ./tests/radixSort2.test.js"
+    "test": "jest ./tests/radixSort.test.js"
   },
   "keywords": [],
   "author": "",
