@@ -1,0 +1,71 @@
+[
+  {
+    "head": {
+      "val": "Foo",
+      "next": null
+    },
+    "tail": {
+      "val": "Foo",
+      "next": null
+    },
+    "length": 1
+  },
+  {
+    "head": {
+      "val": "Foo",
+      "next": {
+        "val": "Bar",
+        "next": null
+      }
+    },
+    "tail": {
+      "val": "Bar",
+      "next": null
+    },
+    "length": 2
+  },
+  {
+    "head": {
+      "val": "Foo",
+      "next": {
+        "val": "Bar",
+        "next": {
+          "val": "Pushkin",
+          "next": null
+        }
+      }
+    },
+    "tail": {
+      "val": "Pushkin",
+      "next": null
+    },
+    "length": 3
+  },
+  {
+    "head": {
+      "val": "Foo",
+      "next": null
+    },
+    "tail": {
+      "val": "Foo",
+      "next": null
+    },
+    "length": 1
+  },
+  {
+    "head": {
+      "val": "Foo",
+      "next": null
+    },
+    "tail": {
+      "val": "Foo",
+      "next": null
+    },
+    "length": 1
+  },
+  {
+    "head": null,
+    "tail": null,
+    "length": 0
+  }
+]

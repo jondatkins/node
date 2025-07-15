@@ -90,8 +90,8 @@ class SinglyLinkedList<T> {
       curr = curr.next;
     }
     // console.log(curr);
-    console.log(`previous node is`);
-    console.log(prev);
+    // console.log(`previous node is`);
+    // console.log(prev);
     let returnNode = this.tail;
     this.tail = prev;
     if (this.tail) {
@@ -101,45 +101,51 @@ class SinglyLinkedList<T> {
     // console.log(prev);
     return returnNode;
   }
+
   traverse() {
     let curr = this.head;
     let prev = null;
     while (curr) {
-      console.log(curr.val);
+      // console.log(curr.val);
       prev = curr;
       curr = curr.next;
     }
     // console.log(curr);
-    console.log(`previous node is`);
-    console.log(prev);
+    // console.log(`previous node is`);
+    // console.log(prev);
   }
 
 }
 
 let list = new SinglyLinkedList();
 list.push("Foo");
-console.log(`Pushing 'Foo'`);
-console.log(list);
+// console.log(`Pushing 'Foo'`);
+// console.log(JSON.stringify(list));
 // list.traverse();
 list.push("Bar");
 // console.log(`Pushing 'Bar'`);
+// console.log(JSON.stringify(list));
 // list.traverse();
 list.push("Pushkin");
 // console.log(`Pushing 'Pushkin'`);
 // list.traverse();
-console.log(list);
-let pushkin = list.pop2();
-console.log(`Popping 'Pushkin'`);
+// console.log(JSON.stringify(list));
+let pushkin = list.pop();
+// console.log(`Popping 'Pushkin'`);
 // console.log(pushkin);
 // list.traverse();
 console.log(list);
-let bar = list.pop2();
-console.log(`Popping 'Bar'`);
+let bar = list.pop();
+// console.log(JSON.stringify(list));
+// console.log(`Popping 'Bar'`);
 // console.log(bar);
-console.log(list);
+// console.log(list);
+// console.log(JSON.stringify(list));
 // list.traverse();
-let foo = list.pop2();
-console.log(`Popping 'Foo'`);
+let foo = list.pop();
+// console.log(`Popping 'Foo'`);
 // console.log(foo);
 // list.traverse();
-console.log(list);
+// console.log(JSON.stringify(list));
+
+module.exports = { Node, SinglyLinkedList };
