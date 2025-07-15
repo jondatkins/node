@@ -71,28 +71,75 @@ class SinglyLinkedList<T> {
     return returnNode;
   }
 
+  pop2() {
+    let curr = this.head;
+    let prev = null;
+    if (!curr) {
+      return undefined;
+    }
+    if (!curr.next) {
+      this.head = null;
+      this.tail = null;
+      // Just set to 0?
+      this.length--;
+      return curr;
+    }
+    while (curr.next) {
+      // console.log(curr.val);
+      prev = curr;
+      curr = curr.next;
+    }
+    // console.log(curr);
+    console.log(`previous node is`);
+    console.log(prev);
+    let returnNode = this.tail;
+    this.tail = prev;
+    if (this.tail) {
+      this.tail.next = null;
+    }
+    this.length--;
+    // console.log(prev);
+    return returnNode;
+  }
+  traverse() {
+    let curr = this.head;
+    let prev = null;
+    while (curr) {
+      console.log(curr.val);
+      prev = curr;
+      curr = curr.next;
+    }
+    // console.log(curr);
+    console.log(`previous node is`);
+    console.log(prev);
+  }
+
 }
 
 let list = new SinglyLinkedList();
 list.push("Foo");
-// console.log(`Pushing 'Foo'`);
-// console.log(list);
+console.log(`Pushing 'Foo'`);
+console.log(list);
+// list.traverse();
 list.push("Bar");
 // console.log(`Pushing 'Bar'`);
-// console.log(list);
+// list.traverse();
 list.push("Pushkin");
 // console.log(`Pushing 'Pushkin'`);
-// console.log(list);
-
-let pushkin = list.pop();
+// list.traverse();
+console.log(list);
+let pushkin = list.pop2();
 console.log(`Popping 'Pushkin'`);
-console.log(pushkin);
-console.dir(list);
-let bar = list.pop();
+// console.log(pushkin);
+// list.traverse();
+console.log(list);
+let bar = list.pop2();
 console.log(`Popping 'Bar'`);
-console.log(bar);
-console.dir(list);
-let foo = list.pop();
+// console.log(bar);
+console.log(list);
+// list.traverse();
+let foo = list.pop2();
 console.log(`Popping 'Foo'`);
-console.log(foo);
-console.dir(list);
+// console.log(foo);
+// list.traverse();
+console.log(list);

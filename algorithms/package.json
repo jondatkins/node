@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/radixSort.ts",
-    "test": "jest ./tests/radixSort.test.js"
+    "start": "node --disable-warning=ExperimentalWarning ./modules/singlyLinkedList.ts",
+    "test": "jest ./tests/singlyLinkedList.test.js"
   },
   "keywords": [],
   "author": "",
