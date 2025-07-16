@@ -1,8 +1,4 @@
-const repl = require('node:repl');
-
-// repl.start();
 class Node<T> {
-
   public val: T;
   public next: Node<T> | null = null;
   constructor(val: T) {
@@ -10,12 +6,6 @@ class Node<T> {
     this.next = null;
   }
 }
-
-// class Node<T> {
-//   public next: Node<T> | null = null;
-//   public prev: Node<T> | null = null;
-//   constructor(public data: T) { }
-// }
 
 var first = new Node("Hi");
 first.next = new Node("there");
@@ -46,16 +36,15 @@ class SinglyLinkedList<T> {
     return this;
   }
 
-  pop(): Node<T> | null {
+  pop(): Node<T> | undefined | null {
     if (!this.head) {
-      return null;
+      return undefined;
     }
     let prev = this.head;
     let next = this.head.next;
     if (!next) {
       this.head = null;
       this.tail = null;
-      // Just set to 0?
       this.length--;
       return prev;
     }
@@ -67,11 +56,13 @@ class SinglyLinkedList<T> {
     this.tail = prev;
     this.tail.next = null;
     this.length--;
-    // console.log(prev);
     return returnNode;
   }
 
   pop2() {
+    if (!this.head) {
+      return undefined;
+    }
     let curr = this.head;
     let prev = null;
     if (!curr) {
@@ -85,20 +76,15 @@ class SinglyLinkedList<T> {
       return curr;
     }
     while (curr.next) {
-      // console.log(curr.val);
       prev = curr;
       curr = curr.next;
     }
-    // console.log(curr);
-    // console.log(`previous node is`);
-    // console.log(prev);
     let returnNode = this.tail;
     this.tail = prev;
     if (this.tail) {
       this.tail.next = null;
     }
     this.length--;
-    // console.log(prev);
     return returnNode;
   }
 
@@ -106,46 +92,83 @@ class SinglyLinkedList<T> {
     let curr = this.head;
     let prev = null;
     while (curr) {
-      // console.log(curr.val);
       prev = curr;
       curr = curr.next;
     }
-    // console.log(curr);
-    // console.log(`previous node is`);
-    // console.log(prev);
+  }
+
+  pop3() {
+    if (!this.head) {
+      return undefined;
+    }
+    let curr = this.head;
+    let newTail = this.head;
+    while (curr.next) {
+      newTail = curr;
+      curr = curr.next;
+    }
+    this.length--;
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+      return curr;
+    }
+    this.tail = newTail;
+    this.tail.next = null;
+    return curr;
+  }
+
+  shift() {
+    if (!this.head) {
+      return undefined;
+    }
+    let temp = this.head;
+    this.head = this.head.next;
+    this.length--;
+    if (this.length === 0) {
+      this.tail = null;
+    }
+    return temp;
+  }
+
+  // Add a node to beginning of list.
+  // Point new head to old head. Set new head to be head.
+  unshift(val: T) {
+    if (!val) {
+      return;
+    }
+    this.length++;
+    let node = new Node<T>(val);
+    if (this.head === null) {
+      this.head = node;
+      this.tail = node;
+    }
+    else {
+      this.head = node;
+      node.next = this.head;
+    }
+    return this;
+  }
+
+  get(index: number) {
+    if (index < 0 || index >= this.length) {
+      return null;
+    }
+    let count = 0;
+    let node = this.head;
+    while (node) {
+      if (count === index) {
+        return node;
+      }
+      node = node.next;
+      count++;
+    }
   }
 
 }
 
-let list = new SinglyLinkedList();
-list.push("Foo");
-// console.log(`Pushing 'Foo'`);
-// console.log(JSON.stringify(list));
-// list.traverse();
-list.push("Bar");
-// console.log(`Pushing 'Bar'`);
-// console.log(JSON.stringify(list));
-// list.traverse();
-list.push("Pushkin");
-// console.log(`Pushing 'Pushkin'`);
-// list.traverse();
-// console.log(JSON.stringify(list));
-let pushkin = list.pop();
-// console.log(`Popping 'Pushkin'`);
-// console.log(pushkin);
-// list.traverse();
-console.log(list);
-let bar = list.pop();
-// console.log(JSON.stringify(list));
-// console.log(`Popping 'Bar'`);
-// console.log(bar);
-// console.log(list);
-// console.log(JSON.stringify(list));
-// list.traverse();
-let foo = list.pop();
-// console.log(`Popping 'Foo'`);
-// console.log(foo);
-// list.traverse();
-// console.log(JSON.stringify(list));
 
+let list = new SinglyLinkedList();
+list.unshift("FooBar")
+console.log(list);
 module.exports = { Node, SinglyLinkedList };
