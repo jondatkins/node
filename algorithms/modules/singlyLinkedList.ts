@@ -156,13 +156,18 @@ class SinglyLinkedList<T> {
     }
     let count = 0;
     let node = this.head;
-    while (node) {
-      if (count === index) {
-        return node;
-      }
+    // while (node) {
+    //   if (count === index) {
+    //     return node;
+    //   }
+    //   node = node.next;
+    //   count++;
+    // }
+    while (count != index && node) {
       node = node.next;
       count++;
     }
+    return node;
   }
 
 }
