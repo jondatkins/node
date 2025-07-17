@@ -129,6 +129,7 @@ test(`testing unshift`, () => {
   expect(list.length).toBe(1)
   list.unshift("more")
   expect(list.head.val).toBe("more")
+  expect(list.head.next.val).toBe("Once")
   expect(list.length).toBe(2)
 })
 test(`get test`, () => {
@@ -139,4 +140,30 @@ test(`get test`, () => {
   list2.push("traveller")
   expect(list2.get(8)).toBe(null)
   expect(list2.get(3).val).toBe("traveller")
+})
+test(`set test`, () => {
+  let list2 = new singlyLinkedList.SinglyLinkedList();
+  list2.push("I")
+  list2.push("met")
+  list2.push("a")
+  list2.push("traveller")
+  list2.set("encountered", 1);
+  expect(list2.get(1).val).toBe("encountered")
+  expect(list2.get(2).val).toBe("a")
+  let retFalse = list2.set("shouldBeFalse", -1);
+  expect(retFalse).toBe(false)
+})
+test(`insert test`, () => {
+  let list2 = new singlyLinkedList.SinglyLinkedList();
+  list2.push("I")
+  list2.push("met")
+  list2.push("a")
+  list2.push("traveller")
+  list2.set("encountered", 1);
+  list2.insert("Ozymandias", 0);
+  expect(list2.get(0).val).toBe("Ozymandias")
+  list2.insert("from", 4);
+  expect(list2.get(4).val).toBe("from")
+  list2.insert("A", 2);
+  expect(list2.get(2).val).toBe("A")
 })

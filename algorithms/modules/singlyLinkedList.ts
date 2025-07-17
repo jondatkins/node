@@ -92,6 +92,7 @@ class SinglyLinkedList<T> {
     let curr = this.head;
     let prev = null;
     while (curr) {
+      console.log(curr);
       prev = curr;
       curr = curr.next;
     }
@@ -132,7 +133,8 @@ class SinglyLinkedList<T> {
   }
 
   // Add a node to beginning of list.
-  // Point new head to old head. Set new head to be head.
+  // assign the current 'head' to the next prop of the new node.
+  // Now just make your new node the head prop of the list.
   unshift(val: T) {
     if (!val) {
       return;
@@ -144,8 +146,8 @@ class SinglyLinkedList<T> {
       this.tail = node;
     }
     else {
-      this.head = node;
       node.next = this.head;
+      this.head = node;
     }
     return this;
   }
@@ -156,13 +158,7 @@ class SinglyLinkedList<T> {
     }
     let count = 0;
     let node = this.head;
-    // while (node) {
-    //   if (count === index) {
-    //     return node;
-    //   }
-    //   node = node.next;
-    //   count++;
-    // }
+
     while (count != index && node) {
       node = node.next;
       count++;
@@ -170,10 +166,44 @@ class SinglyLinkedList<T> {
     return node;
   }
 
+  set(val: T, index: number) {
+    let node: Node<T> | null = this.get(index);
+    if (node) {
+      node.val = val;
+      return true;
+    }
+    return false;
+  }
+
+  // make the node at this index the 'next' node of the 
+  // inserted node. Make the next ref of the previous node
+  // point to the inserted node
+  // Use push and unshift to insert at the beginning or end.
+  insert(val: T, index: number) {
+    if (index === 0) {
+      this.unshift(val);
+      return true;
+    }
+    if (index === this.length - 1) {
+      this.push(val);
+      return true;
+    }
+    let prevNode = this.get(index - 1);
+    let nextNode = prevNode?.next;
+
+  }
 }
 
 
 let list = new SinglyLinkedList();
-list.unshift("FooBar")
-console.log(list);
+list.push("I")
+list.push("met")
+list.push("a")
+list.push("traveller")
+list.insert("Ozymandias", 0);
+// list.traverse();
+list.insert("from", 4);
+// list.traverse();
+list.insert("A", 2);
+// list.traverse();
 module.exports = { Node, SinglyLinkedList };
