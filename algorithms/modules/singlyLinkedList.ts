@@ -184,13 +184,20 @@ class SinglyLinkedList<T> {
       this.unshift(val);
       return true;
     }
-    if (index === this.length - 1) {
+    if (index === this.length) {
       this.push(val);
       return true;
     }
+    // get the previous node. Make the previous node's next point to the new node.
+    // set the new node's next as the previous node's next
+    let newNode = new Node(val);
     let prevNode = this.get(index - 1);
-    let nextNode = prevNode?.next;
-
+    // let nextNode = prevNode?.next;
+    if (prevNode) {
+      let prevNext = prevNode.next;
+      prevNode.next = newNode;
+      newNode.next = prevNext;
+    }
   }
 }
 

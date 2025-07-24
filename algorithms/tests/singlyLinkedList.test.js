@@ -162,8 +162,8 @@ test(`insert test`, () => {
   list2.set("encountered", 1);
   list2.insert("Ozymandias", 0);
   expect(list2.get(0).val).toBe("Ozymandias")
-  list2.insert("from", 4);
-  expect(list2.get(4).val).toBe("from")
+  list2.insert("from", 5);
+  expect(list2.get(5).val).toBe("from")
   list2.insert("A", 2);
   expect(list2.get(2).val).toBe("A")
 })
