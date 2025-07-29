@@ -235,11 +235,10 @@ class SinglyLinkedList<T> {
 
   reverse(): this {
     let prev = null;
+    let next;
     let currNode = this.head;
-    if (!currNode) {
-      return this;
-    }
-    let next = currNode.next;
+    this.head = this.tail;
+    this.tail = currNode;
 
     while (currNode) {
       next = currNode.next;
@@ -248,21 +247,18 @@ class SinglyLinkedList<T> {
       currNode = next;
     }
 
-    let temp = this.head;
-    this.head = this.tail;
-    if (this.head && temp) {
-      this.tail = temp;
-    }
+    this.print();
     return this;
   }
 
   print(): this {
     let currNode = this.head;
-
+    let arr = [];
     while (currNode) {
-      console.log(currNode.val);
+      arr.push(currNode.val);
       currNode = currNode.next;
     }
+    console.log(arr);
     return this;
   }
 }
