@@ -180,6 +180,9 @@ class SinglyLinkedList<T> {
   // point to the inserted node
   // Use push and unshift to insert at the beginning or end.
   insert(val: T, index: number) {
+    if (index < -1 || index > this.length) {
+      return false;
+    }
     if (index === 0) {
       this.unshift(val);
       return true;
@@ -197,7 +200,70 @@ class SinglyLinkedList<T> {
       let prevNext = prevNode.next;
       prevNode.next = newNode;
       newNode.next = prevNext;
+      this.length++;
+      return true;
     }
+    return false;
+  }
+
+  remove(index: number) {
+    if (index < 0 || index > this.length) {
+      return false;
+    }
+    if (index === 0) {
+      this.shift();
+      return true;
+    }
+    if (index === this.length) {
+      this.pop();
+      return true;
+    }
+    // get the previous node. Make the previous node's next point to the new node.
+    // set the new node's next as the previous node's next
+    let prevNode = this.get(index - 1);
+    let nextNode = prevNode?.next;
+    if (prevNode) {
+      // prevNode.next points to prevNode.next.next
+      if (prevNode.next) {
+        prevNode.next = prevNode.next.next;
+      }
+      this.length--;
+      return nextNode;
+    }
+    return false;
+  }
+
+  reverse(): this {
+    let prev = null;
+    let currNode = this.head;
+    if (!currNode) {
+      return this;
+    }
+    let next = currNode.next;
+
+    while (currNode) {
+      next = currNode.next;
+      currNode.next = prev;
+      prev = currNode;
+      currNode = next;
+    }
+
+    let temp = this.head;
+    this.head = this.tail;
+    if (this.head && temp) {
+      this.tail = temp;
+    }
+    return this;
+  }
+
+  print(): this {
+    let currNode = this.head;
+
+    while (currNode) {
+      console.log(currNode.val);
+      currNode = currNode.next;
+    }
+    return this;
   }
 }
 
@@ -207,10 +273,6 @@ list.push("I")
 list.push("met")
 list.push("a")
 list.push("traveller")
-list.insert("Ozymandias", 0);
-// list.traverse();
-list.insert("from", 4);
-// list.traverse();
-list.insert("A", 2);
-// list.traverse();
+list.reverse();
+
 module.exports = { Node, SinglyLinkedList };

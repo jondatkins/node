@@ -167,3 +167,26 @@ test(`insert test`, () => {
   list2.insert("A", 2);
   expect(list2.get(2).val).toBe("A")
 })
+test(`remove test`, () => {
+  let list = new singlyLinkedList.SinglyLinkedList();
+  list.push("I")
+  list.push("met")
+  list.push("a")
+  list.push("traveller")
+  expect(list.remove(100)).toBe(false)
+  let met = list.remove(1);
+  expect(met.val).toBe("met")
+  expect(list.get(1).val).toBe("a")
+})
+test(`reverse test`, () => {
+  let list = new singlyLinkedList.SinglyLinkedList();
+  list.push("I")
+  list.push("met")
+  list.push("a")
+  list.push("traveller")
+  list.reverse();
+  expect(list.get(0).val).toBe("traveller")
+  expect(list.get(1).val).toBe("a")
+  expect(list.get(2).val).toBe("met")
+  expect(list.get(3).val).toBe("I")
+})
