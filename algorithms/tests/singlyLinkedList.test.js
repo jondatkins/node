@@ -147,8 +147,10 @@ test(`set test`, () => {
   list2.push("met")
   list2.push("a")
   list2.push("traveller")
-  list2.set("encountered", 1);
+  list2.set(1, "encountered");
+  list2.set(0, "one");
   expect(list2.get(1).val).toBe("encountered")
+  expect(list2.get(0).val).toBe("one")
   expect(list2.get(2).val).toBe("a")
   let retFalse = list2.set("shouldBeFalse", -1);
   expect(retFalse).toBe(false)
@@ -189,4 +191,44 @@ test(`reverse test`, () => {
   expect(list.get(1).val).toBe("a")
   expect(list.get(2).val).toBe("met")
   expect(list.get(3).val).toBe("I")
+})
+test(`rotate test`, () => {
+  // let list = new singlyLinkedList.SinglyLinkedList();
+  // list.push(5).push(10).push(15).push(20).push(25);
+  // list.head.val; // 5
+  // list.tail.val; // 25;
+  // list.rotate(3);
+  // list.head.val; // 20
+  // list.head.next.val; // 25
+  // list.head.next.next.val; // 5
+  // list.head.next.next.next.val; // 10
+  // list.head.next.next.next.next.val; // 15
+  // list.tail.val; // 15
+  // list.tail.next; // null
+  //
+  // list = new singlyLinkedList.SinglyLinkedList();
+  // list.push(5).push(10).push(15).push(20).push(25);
+  // list.head.val; // 5
+  // list.tail.val; // 25;
+  // list.rotate(-1);
+  // list.head.val; // 25
+  // list.head.next.val; // 5
+  // list.head.next.next.val; // 10
+  // list.head.next.next.next.val; // 15
+  // list.head.next.next.next.next.val; // 20
+  // list.tail.val; // 20
+  // list.tail.next // null
+  //
+  // list = new singlyLinkedList.SinglyLinkedList();
+  // list.push(5).push(10).push(15).push(20).push(25);
+  // list.head.val; // 5
+  // list.tail.val; // 25;
+  // list.rotate(1000);
+  // list.head.val; // 5
+  // list.head.next.val; // 10
+  // list.head.next.next.val; // 15
+  // list.head.next.next.next.val; // 20
+  // list.head.next.next.next.next.val; // 25
+  // list.tail.val; // 25
+  // list.tail.next // null
 })

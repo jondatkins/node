@@ -166,7 +166,7 @@ class SinglyLinkedList<T> {
     return node;
   }
 
-  set(val: T, index: number) {
+  set(index: number, val: T) {
     let node: Node<T> | null = this.get(index);
     if (node) {
       node.val = val;
@@ -179,7 +179,7 @@ class SinglyLinkedList<T> {
   // inserted node. Make the next ref of the previous node
   // point to the inserted node
   // Use push and unshift to insert at the beginning or end.
-  insert(val: T, index: number) {
+  insert(index: number, val: T) {
     if (index < -1 || index > this.length) {
       return false;
     }
@@ -208,7 +208,7 @@ class SinglyLinkedList<T> {
 
   remove(index: number) {
     if (index < 0 || index > this.length) {
-      return false;
+      return undefined;
     }
     if (index === 0) {
       this.shift();
@@ -230,7 +230,7 @@ class SinglyLinkedList<T> {
       this.length--;
       return nextNode;
     }
-    return false;
+    return undefined;
   }
 
   reverse(): this {
@@ -251,6 +251,10 @@ class SinglyLinkedList<T> {
     return this;
   }
 
+  rotate(num: number): void {
+
+  }
+
   print(): this {
     let currNode = this.head;
     let arr = [];
@@ -262,13 +266,5 @@ class SinglyLinkedList<T> {
     return this;
   }
 }
-
-
-let list = new SinglyLinkedList();
-list.push("I")
-list.push("met")
-list.push("a")
-list.push("traveller")
-list.reverse();
 
 module.exports = { Node, SinglyLinkedList };
