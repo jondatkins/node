@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/singlyLinkedListRotate.ts",
-    "test": "jest ./tests/singlyLinkedList.test.js"
+    "start": "node --disable-warning=ExperimentalWarning ./modules/singlyLinkedList.ts",
+    "test": "jest ./tests/singlyLinkedListRotate.test.js"
   },
   "keywords": [],
   "author": "",

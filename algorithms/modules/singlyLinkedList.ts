@@ -252,7 +252,16 @@ class SinglyLinkedList<T> {
   }
 
   rotate(num: number): void {
-
+    if (this.length < 1) {
+      return undefined;
+    }
+    while (num > 0) {
+      let poppedNode = this.pop();
+      if (poppedNode) {
+        this.unshift(poppedNode.val);
+      }
+      num--;
+    }
   }
 
   print(): this {
@@ -267,4 +276,11 @@ class SinglyLinkedList<T> {
   }
 }
 
+let list = new SinglyLinkedList();
+list.push(5).push(10).push(15).push(20).push(25);
+list.print();
+console.log('rotate by 3');
+list.rotate(3) // 15, 20, 25, 5, 10
+console.log(list.head.next);
+list.print();
 module.exports = { Node, SinglyLinkedList };
