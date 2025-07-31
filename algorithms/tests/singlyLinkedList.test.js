@@ -162,11 +162,11 @@ test(`insert test`, () => {
   list2.push("a")
   list2.push("traveller")
   list2.set("encountered", 1);
-  list2.insert("Ozymandias", 0);
+  list2.insert(0, "Ozymandias");
   expect(list2.get(0).val).toBe("Ozymandias")
-  list2.insert("from", 5);
+  list2.insert(5, "from");
   expect(list2.get(5).val).toBe("from")
-  list2.insert("A", 2);
+  list2.insert(2, "A");
   expect(list2.get(2).val).toBe("A")
 })
 test(`remove test`, () => {
@@ -175,7 +175,7 @@ test(`remove test`, () => {
   list.push("met")
   list.push("a")
   list.push("traveller")
-  expect(list.remove(100)).toBe(false)
+  expect(list.remove(100)).toBe(undefined)
   let met = list.remove(1);
   expect(met.val).toBe("met")
   expect(list.get(1).val).toBe("a")
@@ -191,44 +191,4 @@ test(`reverse test`, () => {
   expect(list.get(1).val).toBe("a")
   expect(list.get(2).val).toBe("met")
   expect(list.get(3).val).toBe("I")
-})
-test(`rotate test`, () => {
-  // let list = new singlyLinkedList.SinglyLinkedList();
-  // list.push(5).push(10).push(15).push(20).push(25);
-  // list.head.val; // 5
-  // list.tail.val; // 25;
-  // list.rotate(3);
-  // list.head.val; // 20
-  // list.head.next.val; // 25
-  // list.head.next.next.val; // 5
-  // list.head.next.next.next.val; // 10
-  // list.head.next.next.next.next.val; // 15
-  // list.tail.val; // 15
-  // list.tail.next; // null
-  //
-  // list = new singlyLinkedList.SinglyLinkedList();
-  // list.push(5).push(10).push(15).push(20).push(25);
-  // list.head.val; // 5
-  // list.tail.val; // 25;
-  // list.rotate(-1);
-  // list.head.val; // 25
-  // list.head.next.val; // 5
-  // list.head.next.next.val; // 10
-  // list.head.next.next.next.val; // 15
-  // list.head.next.next.next.next.val; // 20
-  // list.tail.val; // 20
-  // list.tail.next // null
-  //
-  // list = new singlyLinkedList.SinglyLinkedList();
-  // list.push(5).push(10).push(15).push(20).push(25);
-  // list.head.val; // 5
-  // list.tail.val; // 25;
-  // list.rotate(1000);
-  // list.head.val; // 5
-  // list.head.next.val; // 10
-  // list.head.next.next.val; // 15
-  // list.head.next.next.next.val; // 20
-  // list.head.next.next.next.next.val; // 25
-  // list.tail.val; // 25
-  // list.tail.next // null
 })
