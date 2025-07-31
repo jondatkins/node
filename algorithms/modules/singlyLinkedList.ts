@@ -17,6 +17,7 @@ class SinglyLinkedList<T> {
     this.length = 0;
   }
 
+  // Add a node to end of list
   push(val: T) {
     let node = new Node<T>(val);
 

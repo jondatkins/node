@@ -1,13 +1,15 @@
 class Node<T> {
   public val: T;
+  public prev: Node<T> | null = null;
   public next: Node<T> | null = null;
   constructor(val: T) {
     this.val = val;
+    this.prev = null;
     this.next = null;
   }
 }
 
-class SinglyLinkedList<T> {
+class DoublyLinkedList<T> {
   public head: Node<T> | null;
   public tail: Node<T> | null;
   public length: number;
@@ -17,23 +19,28 @@ class SinglyLinkedList<T> {
     this.length = 0;
   }
 
+  // Add node to end of list
   push(val: T) {
     let node = new Node<T>(val);
-
+    // list is empty, so just add new node as head and tail.
     if (!this.head || !this.tail) {
       this.head = node;
       this.tail = this.head;
     }
+    // New node is 'next' of current tail, then make tail 'prev'
+    // of new node, then set new node as this.tail.
     else {
       this.tail.next = node;
+      node.prev = this.tail;
       this.tail = node;
     }
     this.length++;
     return this;
   }
 
+  // remove node from end of list and return it
   pop(): Node<T> | undefined | null {
-    if (!this.head) {
+    if (!this.head || !this.tail) {
       return undefined;
     }
     let prev = this.head;
@@ -44,12 +51,11 @@ class SinglyLinkedList<T> {
       this.length--;
       return prev;
     }
-    while (next.next) {
-      prev = next;
-      next = next.next;
+    if (!this.tail.prev) {
+      return undefined;
     }
     let returnNode = this.tail;
-    this.tail = prev;
+    this.tail = this.tail.prev;
     this.tail.next = null;
     this.length--;
     return returnNode;
@@ -234,11 +240,12 @@ class SinglyLinkedList<T> {
 
 }
 
-let list = new SinglyLinkedList();
-list.push(5).push(10).push(15).push(20).push(25);
-list.print();
-console.log('rotate by 3');
-list.rotate(3) // 20, 25, 5, 10,
-console.log(list.head.next);
-list.print();
-module.exports = { Node, SinglyLinkedList };
+let list = new DoublyLinkedList();
+list.push("Foo");
+list.print()
+list.push("Bar")
+list.print()
+console.log(list.tail.prev.val);
+list.push("Pushkin")
+list.print()
+module.exports = { Node, DoublyLinkedList };

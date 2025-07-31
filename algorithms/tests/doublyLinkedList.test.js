@@ -1,16 +1,17 @@
-const singlyLinkedList = require('../modules/singlyLinkedList')
+const doublyLinkedList = require('../modules/doublyLinkedList')
 
 test(`push`, () => {
-  let list = new singlyLinkedList.SinglyLinkedList();
+  let list = new doublyLinkedList.DoublyLinkedList();
   list.push("Foo");
   expect(list.tail.val).toEqual("Foo")
   list.push("Bar")
   expect(list.tail.val).toEqual("Bar")
+  expect(list.tail.prev.val).toEqual("Foo")
   list.push("Pushkin")
   expect(list.tail.val).toEqual("Pushkin")
 })
 test(`pop`, () => {
-  let list = new singlyLinkedList.SinglyLinkedList();
+  let list = new doublyLinkedList.DoublyLinkedList();
   list.push("Foo");
   list.push("Bar")
   list.push("Pushkin")
@@ -35,7 +36,7 @@ test(`pop`, () => {
   expect(list.length).toEqual(0)
 })
 test(`shift`, () => {
-  let list = new singlyLinkedList.SinglyLinkedList();
+  let list = new doublyLinkedList.DoublyLinkedList();
   list.push("I");
   list.push("have");
   list.push("of");
@@ -56,7 +57,7 @@ test(`shift`, () => {
   expect(list.tail).toBe(null)
 })
 test(`testing unshift`, () => {
-  let list = new singlyLinkedList.SinglyLinkedList();
+  let list = new doublyLinkedList.DoublyLinkedList();
   list.unshift("Once")
   expect(list.head.val).toBe("Once")
   expect(list.tail.val).toBe("Once")
@@ -68,7 +69,7 @@ test(`testing unshift`, () => {
   expect(list.length).toBe(2)
 })
 test(`get test`, () => {
-  let list2 = new singlyLinkedList.SinglyLinkedList();
+  let list2 = new doublyLinkedList.DoublyLinkedList();
   list2.push("I")
   list2.push("met")
   list2.push("a")
@@ -77,7 +78,7 @@ test(`get test`, () => {
   expect(list2.get(3).val).toBe("traveller")
 })
 test(`set test`, () => {
-  let list2 = new singlyLinkedList.SinglyLinkedList();
+  let list2 = new doublyLinkedList.DoublyLinkedList();
   list2.push("I")
   list2.push("met")
   list2.push("a")
@@ -91,7 +92,7 @@ test(`set test`, () => {
   expect(retFalse).toBe(false)
 })
 test(`insert test`, () => {
-  let list2 = new singlyLinkedList.SinglyLinkedList();
+  let list2 = new doublyLinkedList.DoublyLinkedList();
   list2.push("I")
   list2.push("met")
   list2.push("a")
@@ -105,7 +106,7 @@ test(`insert test`, () => {
   expect(list2.get(2).val).toBe("A")
 })
 test(`remove test`, () => {
-  let list = new singlyLinkedList.SinglyLinkedList();
+  let list = new doublyLinkedList.DoublyLinkedList();
   list.push("I")
   list.push("met")
   list.push("a")
@@ -116,7 +117,7 @@ test(`remove test`, () => {
   expect(list.get(1).val).toBe("a")
 })
 test(`reverse test`, () => {
-  let list = new singlyLinkedList.SinglyLinkedList();
+  let list = new doublyLinkedList.DoublyLinkedList();
   list.push("I")
   list.push("met")
   list.push("a")
