@@ -40,27 +40,29 @@ class DoublyLinkedList<T> {
 
   // remove node from end of list and return it
   pop(): Node<T> | undefined | null {
-    if (!this.head || !this.tail) {
+    // Return undefined for an empty list
+    if (this.length < 1) {
       return undefined;
     }
-    let prev = this.head;
-    let next = this.head.next;
-    if (!next) {
-      this.head = null;
-      this.tail = null;
+    // Make the new tail the current tail's previous value
+    // Set the next value for the new tail to null.
+    if (this.tail) {
+      let returnTail = this.tail;
+      this.tail = this.tail.prev;
+      if (this.tail) {
+        this.tail.next = null;
+      }
       this.length--;
-      return prev;
+      // Set head and tail to null if the list is now empty
+      if (this.length < 1) {
+        this.head = null;
+        this.tail = null;
+      }
+      return returnTail;
     }
-    if (!this.tail.prev) {
-      return undefined;
-    }
-    let returnNode = this.tail;
-    this.tail = this.tail.prev;
-    this.tail.next = null;
-    this.length--;
-    return returnNode;
   }
 
+  // Remove first item in list and return it.
   shift() {
     if (!this.head) {
       return undefined;
@@ -81,16 +83,18 @@ class DoublyLinkedList<T> {
     if (!val) {
       return;
     }
-    this.length++;
     let node = new Node<T>(val);
     if (this.head === null) {
       this.head = node;
       this.tail = node;
     }
     else {
+      this.head.prev = node;
       node.next = this.head;
       this.head = node;
+
     }
+    this.length++;
     return this;
   }
 
@@ -241,11 +245,16 @@ class DoublyLinkedList<T> {
 }
 
 let list = new DoublyLinkedList();
-list.push("Foo");
-list.print()
-list.push("Bar")
-list.print()
-console.log(list.tail.prev.val);
-list.push("Pushkin")
-list.print()
+
+// list.push("Foo");
+// list.push("Bar")
+// list.push("Pushkin")
+// list.print()
+// let pushkin = list.pop();
+// list.print()
+// console.log(pushkin);
+// let bar = list.pop();
+// // console.log(bar);
+// let foo = list.pop();
+// // console.log(foo);
 module.exports = { Node, DoublyLinkedList };

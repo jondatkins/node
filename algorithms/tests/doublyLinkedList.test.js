@@ -15,7 +15,10 @@ test(`pop`, () => {
   list.push("Foo");
   list.push("Bar")
   list.push("Pushkin")
+  list.print()
+  console.log(list.length)
   let pushkin = list.pop();
+  // list.print()
   expect(pushkin.val).toBe("Pushkin")
   expect(list.tail.val).toBe("Bar")
   expect(list.length).toEqual(2)
@@ -63,9 +66,12 @@ test(`testing unshift`, () => {
   expect(list.tail.val).toBe("Once")
   expect(list.head.next).toBe(null)
   expect(list.length).toBe(1)
+  // list will be "more","Once"
   list.unshift("more")
   expect(list.head.val).toBe("more")
   expect(list.head.next.val).toBe("Once")
+  // Once's prev should be "more"
+  expect(list.head.next.prev.val).toBe("more")
   expect(list.length).toBe(2)
 })
 test(`get test`, () => {
