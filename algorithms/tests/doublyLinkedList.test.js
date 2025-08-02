@@ -48,6 +48,7 @@ test(`shift`, () => {
   let i = list.shift();
   expect(i.val).toBe("I")
   expect(list.head.val).toBe("have")
+  expect(list.head.prev).toBe(null)
   let have = list.shift();
   let of = list.shift();
   let late = list.shift();
@@ -108,8 +109,11 @@ test(`insert test`, () => {
   expect(list2.get(0).val).toBe("Ozymandias")
   list2.insert(5, "from");
   expect(list2.get(5).val).toBe("from")
+  expect(list2.get(5).prev.val).toBe("traveller")
   list2.insert(2, "A");
   expect(list2.get(2).val).toBe("A")
+  // [ 'Ozymandias', 'I', 'A', 'met', 'a', 'traveller', 'from' ]
+  expect(list2.get(2).prev.val).toBe("I")
 })
 test(`remove test`, () => {
   let list = new doublyLinkedList.DoublyLinkedList();
@@ -121,6 +125,8 @@ test(`remove test`, () => {
   let met = list.remove(1);
   expect(met.val).toBe("met")
   expect(list.get(1).val).toBe("a")
+  // [ 'I', 'a', 'traveller' ]
+  expect(list.get(1).prev.val).toBe("I")
 })
 test(`reverse test`, () => {
   let list = new doublyLinkedList.DoublyLinkedList();
@@ -133,4 +139,46 @@ test(`reverse test`, () => {
   expect(list.get(1).val).toBe("a")
   expect(list.get(2).val).toBe("met")
   expect(list.get(3).val).toBe("I")
+})
+test(`rotate by 3`, () => {
+  let list = new doublyLinkedList.DoublyLinkedList();
+  list.push(5).push(10).push(15).push(20).push(25);
+  expect(list.head.val).toEqual(5)
+  expect(list.tail.val).toEqual(25)
+  list.rotate(3);
+  expect(list.head.val).toEqual(20)
+  expect(list.head.next.val).toEqual(25)
+  expect(list.head.next.next.val).toEqual(5)
+  expect(list.head.next.next.next.val).toEqual(10)
+  expect(list.head.next.next.next.next.val).toEqual(15)
+  expect(list.tail.val).toEqual(15)
+  expect(list.tail.next).toEqual(null)
+})
+test(`rotate by -1`, () => {
+  let list = new doublyLinkedList.DoublyLinkedList();
+  list.push(5).push(10).push(15).push(20).push(25);
+  expect(list.head.val).toEqual(5)
+  expect(list.tail.val).toEqual(25)
+  list.rotate(-1);
+  expect(list.head.val).toEqual(25)
+  expect(list.head.next.val).toEqual(5)
+  expect(list.head.next.next.val).toEqual(10)
+  expect(list.head.next.next.next.val).toEqual(15)
+  expect(list.head.next.next.next.next.val).toEqual(20)
+  expect(list.tail.val).toEqual(20)
+  expect(list.tail.next).toEqual(null)
+})
+test(`rotate by 1000`, () => {
+  let list = new doublyLinkedList.DoublyLinkedList();
+  list.push(5).push(10).push(15).push(20).push(25);
+  expect(list.head.val).toEqual(5)
+  expect(list.tail.val).toEqual(25)
+  list.rotate(1000);
+  expect(list.head.val).toEqual(5)
+  expect(list.head.next.val).toEqual(10)
+  expect(list.head.next.next.val).toEqual(15)
+  expect(list.head.next.next.next.val).toEqual(20)
+  expect(list.head.next.next.next.next.val).toEqual(25)
+  expect(list.tail.val).toEqual(25)
+  expect(list.tail.next).toEqual(null)
 })

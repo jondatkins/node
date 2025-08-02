@@ -69,6 +69,9 @@ class DoublyLinkedList<T> {
     }
     let temp = this.head;
     this.head = this.head.next;
+    if (this.head) {
+      this.head.prev = null;
+    }
     this.length--;
     if (this.length === 0) {
       this.tail = null;
@@ -92,7 +95,6 @@ class DoublyLinkedList<T> {
       this.head.prev = node;
       node.next = this.head;
       this.head = node;
-
     }
     this.length++;
     return this;
@@ -167,11 +169,14 @@ class DoublyLinkedList<T> {
     // set the new node's next as the previous node's next
     let newNode = new Node(val);
     let prevNode = this.get(index - 1);
-    // let nextNode = prevNode?.next;
     if (prevNode) {
       let prevNext = prevNode.next;
       prevNode.next = newNode;
       newNode.next = prevNext;
+      newNode.prev = prevNode;
+      if (prevNext) {
+        prevNext.prev = newNode;
+      }
       this.length++;
       return true;
     }
@@ -193,14 +198,17 @@ class DoublyLinkedList<T> {
     // get the previous node. Make the previous node's next point to the new node.
     // set the new node's next as the previous node's next
     let prevNode = this.get(index - 1);
-    let nextNode = prevNode?.next;
+    let removedNode = prevNode?.next;
     if (prevNode) {
       // prevNode.next points to prevNode.next.next
       if (prevNode.next) {
         prevNode.next = prevNode.next.next;
+        if (prevNode.next) {
+          prevNode.next.prev = prevNode;
+        }
       }
       this.length--;
-      return nextNode;
+      return removedNode;
     }
     return undefined;
   }
@@ -225,7 +233,9 @@ class DoublyLinkedList<T> {
     let currNode = this.head;
     let arr = [];
     while (currNode) {
-      arr.push(currNode.val);
+      let prevVal = currNode.prev?.val;
+      let nextVal = currNode.next?.val;
+      arr.push(`${currNode.val} prev: ${prevVal} curr: ${nextVal}`);
       currNode = currNode.next;
     }
     console.log(arr);
@@ -246,15 +256,12 @@ class DoublyLinkedList<T> {
 
 let list = new DoublyLinkedList();
 
-// list.push("Foo");
-// list.push("Bar")
-// list.push("Pushkin")
-// list.print()
-// let pushkin = list.pop();
-// list.print()
-// console.log(pushkin);
-// let bar = list.pop();
-// // console.log(bar);
-// let foo = list.pop();
-// // console.log(foo);
+list.push("I")
+list.push("met")
+list.push("a")
+list.push("traveller")
+let met = list.remove(1);
+// [ 'I', 'a', 'traveller' ]
+list.print();
+// [ 'I', 'a', 'traveller' ]
 module.exports = { Node, DoublyLinkedList };

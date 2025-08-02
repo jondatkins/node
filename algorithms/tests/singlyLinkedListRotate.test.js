@@ -1,6 +1,5 @@
 const singlyLinkedList = require('../modules/singlyLinkedList')
 
-
 test(`rotate by 3`, () => {
   let list = new singlyLinkedList.SinglyLinkedList();
   list.push(5).push(10).push(15).push(20).push(25);
@@ -15,8 +14,6 @@ test(`rotate by 3`, () => {
   expect(list.tail.val).toEqual(15)
   expect(list.tail.next).toEqual(null)
 })
-
-
 test(`rotate by -1`, () => {
   let list = new singlyLinkedList.SinglyLinkedList();
   list.push(5).push(10).push(15).push(20).push(25);
@@ -31,7 +28,6 @@ test(`rotate by -1`, () => {
   expect(list.tail.val).toEqual(20)
   expect(list.tail.next).toEqual(null)
 })
-
 test(`rotate by 1000`, () => {
   let list = new singlyLinkedList.SinglyLinkedList();
   list.push(5).push(10).push(15).push(20).push(25);
