@@ -4,11 +4,13 @@ test(`push`, () => {
   let list = new doublyLinkedList.DoublyLinkedList();
   list.push("Foo");
   expect(list.tail.val).toEqual("Foo")
+  expect(list.head.val).toEqual("Foo")
   list.push("Bar")
   expect(list.tail.val).toEqual("Bar")
   expect(list.tail.prev.val).toEqual("Foo")
   list.push("Pushkin")
   expect(list.tail.val).toEqual("Pushkin")
+  expect(list.tail.prev.val).toEqual("Bar")
 })
 test(`pop`, () => {
   let list = new doublyLinkedList.DoublyLinkedList();
@@ -16,14 +18,15 @@ test(`pop`, () => {
   list.push("Bar")
   list.push("Pushkin")
   list.print()
-  console.log(list.length)
   let pushkin = list.pop();
   // list.print()
   expect(pushkin.val).toBe("Pushkin")
+  expect(pushkin.prev).toBe(null)
   expect(list.tail.val).toBe("Bar")
   expect(list.length).toEqual(2)
   let bar = list.pop();
   expect(bar.val).toBe("Bar")
+  expect(bar.prev).toBe(null)
   expect(list.tail.val).toBe("Foo")
   expect(list.length).toEqual(1)
   let foo = list.pop();
@@ -31,7 +34,6 @@ test(`pop`, () => {
   expect(list.tail).toBe(null)
   expect(list.head).toBe(null)
   expect(list.length).toEqual(0)
-
   let undef = list.pop();
   expect(undef).toBe(undefined)
   expect(list.tail).toBe(null)

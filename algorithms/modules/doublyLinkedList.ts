@@ -39,7 +39,8 @@ class DoublyLinkedList<T> {
   }
 
   // remove node from end of list and return it
-  pop(): Node<T> | undefined | null {
+  // Keep the previous ref for the returned node for the rotate method.
+  pop(isKeepPrev?: boolean): Node<T> | undefined | null {
     // Return undefined for an empty list
     if (this.length < 1) {
       return undefined;
@@ -57,6 +58,9 @@ class DoublyLinkedList<T> {
       if (this.length < 1) {
         this.head = null;
         this.tail = null;
+      }
+      if (!isKeepPrev) {
+        returnTail.prev = null;
       }
       return returnTail;
     }
@@ -117,7 +121,7 @@ class DoublyLinkedList<T> {
     if (num < 0) {
       num = Math.abs(num);
       while (num > 0) {
-        let poppedNode = this.pop();
+        let poppedNode = this.pop(true);
         if (poppedNode) {
           this.unshift(poppedNode.val);
         }
@@ -255,13 +259,11 @@ class DoublyLinkedList<T> {
 }
 
 let list = new DoublyLinkedList();
-
-list.push("I")
-list.push("met")
-list.push("a")
-list.push("traveller")
-let met = list.remove(1);
-// [ 'I', 'a', 'traveller' ]
-list.print();
-// [ 'I', 'a', 'traveller' ]
+list.push("Foo");
+list.push("Bar")
+list.push("Pushkin")
+list.print()
+let pushkin = list.pop();
+console.log(list.tail.val);
+console.log(pushkin.prev);
 module.exports = { Node, DoublyLinkedList };
