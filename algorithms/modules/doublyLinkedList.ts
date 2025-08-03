@@ -41,29 +41,27 @@ class DoublyLinkedList<T> {
   // remove node from end of list and return it
   // Keep the previous ref for the returned node for the rotate method.
   pop(isKeepPrev?: boolean): Node<T> | undefined | null {
-    // Return undefined for an empty list
-    if (this.length < 1) {
+    if (!this.head) {
       return undefined;
     }
-    // Make the new tail the current tail's previous value
-    // Set the next value for the new tail to null.
-    if (this.tail) {
-      let returnTail = this.tail;
-      this.tail = this.tail.prev;
+    let poppedNode = this.tail;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    }
+    else {
+      if (poppedNode) {
+        this.tail = poppedNode.prev;
+        if (!isKeepPrev) {
+          poppedNode.prev = null;
+        }
+      }
       if (this.tail) {
         this.tail.next = null;
       }
-      this.length--;
-      // Set head and tail to null if the list is now empty
-      if (this.length < 1) {
-        this.head = null;
-        this.tail = null;
-      }
-      if (!isKeepPrev) {
-        returnTail.prev = null;
-      }
-      return returnTail;
     }
+    this.length--;
+    return poppedNode;
   }
 
   // Remove first item in list and return it.
@@ -71,16 +69,22 @@ class DoublyLinkedList<T> {
     if (!this.head) {
       return undefined;
     }
-    let temp = this.head;
-    this.head = this.head.next;
-    if (this.head) {
-      this.head.prev = null;
-    }
-    this.length--;
-    if (this.length === 0) {
+    let oldHead = this.head;
+    if (this.length === 1) {
+      this.head = null;
       this.tail = null;
     }
-    return temp;
+    else {
+      if (this.head) {
+        this.head = this.head.next;
+        if (this.head) {
+          this.head.prev = null;
+        }
+      }
+    }
+    oldHead.next = null;
+    this.length--;
+    return oldHead;
   }
 
   // Add a node to beginning of list.

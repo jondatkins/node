@@ -51,6 +51,7 @@ test(`shift`, () => {
   expect(i.val).toBe("I")
   expect(list.head.val).toBe("have")
   expect(list.head.prev).toBe(null)
+  expect(i.next).toBe(null)
   let have = list.shift();
   let of = list.shift();
   let late = list.shift();
@@ -60,6 +61,7 @@ test(`shift`, () => {
   expect(late.val).toBe("late")
   expect(undef).toBe(undefined)
   expect(list.length).toBe(0)
+  expect(list.head).toBe(null)
   expect(list.tail).toBe(null)
 })
 test(`testing unshift`, () => {
