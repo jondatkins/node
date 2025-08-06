@@ -92,7 +92,7 @@ class DoublyLinkedList<T> {
   // Now just make your new node the head prop of the list.
   unshift(val: T) {
     if (!val) {
-      return;
+      return undefined;
     }
     let node = new Node<T>(val);
     if (this.head === null) {
@@ -138,14 +138,24 @@ class DoublyLinkedList<T> {
     if (index < 0 || index >= this.length) {
       return null;
     }
-    let count = 0;
-    let node = this.head;
-
-    while (count != index && node) {
-      node = node.next;
-      count++;
+    if (index <= Math.floor(this.length / 2)) {
+      let count = 0;
+      let node = this.head;
+      while (count != index && node) {
+        node = node.next;
+        count++;
+      }
+      return node;
     }
-    return node;
+    else {
+      let count = this.length - 1;
+      let node = this.tail;
+      while (count != index && node) {
+        node = node.prev;
+        count--;
+      }
+      return node;
+    }
   }
 
   set(index: number, val: T) {
@@ -166,24 +176,25 @@ class DoublyLinkedList<T> {
       return false;
     }
     if (index === 0) {
-      this.unshift(val);
-      return true;
+      return !!this.unshift(val);
     }
     if (index === this.length) {
-      this.push(val);
-      return true;
+      return !!this.push(val);
     }
-    // get the previous node. Make the previous node's next point to the new node.
-    // set the new node's next as the previous node's next
+    // I need the node before and after the node to insert.
+    // The before node's next should be set to the new node.
+    // The new node's prev should be set to the before node.
+    // The new node's next is set to the after node.
+    // The after node's prev is set to the new node
     let newNode = new Node(val);
-    let prevNode = this.get(index - 1);
-    if (prevNode) {
-      let prevNext = prevNode.next;
-      prevNode.next = newNode;
-      newNode.next = prevNext;
-      newNode.prev = prevNode;
-      if (prevNext) {
-        prevNext.prev = newNode;
+    let beforeNode = this.get(index - 1);
+    if (beforeNode) {
+      let afterNode = beforeNode.next;
+      beforeNode.next = newNode;
+      newNode.next = afterNode;
+      newNode.prev = beforeNode;
+      if (afterNode) {
+        afterNode.prev = newNode;
       }
       this.length++;
       return true;
@@ -191,17 +202,17 @@ class DoublyLinkedList<T> {
     return false;
   }
 
+  // Remove a node from a given index, and return that 
+  // node.
   remove(index: number) {
-    if (index < 0 || index > this.length) {
+    if (index < 0 || index >= this.length) {
       return undefined;
     }
     if (index === 0) {
-      this.shift();
-      return true;
+      return this.shift();
     }
     if (index === this.length) {
-      this.pop();
-      return true;
+      return this.pop();
     }
     // get the previous node. Make the previous node's next point to the new node.
     // set the new node's next as the previous node's next
@@ -216,24 +227,29 @@ class DoublyLinkedList<T> {
         }
       }
       this.length--;
+      if (removedNode) {
+        removedNode.next = null;
+        removedNode.prev = null;
+      }
       return removedNode;
     }
     return undefined;
   }
 
   reverse(): this {
-    let prev = null;
-    let next;
     let currNode = this.head;
-    this.head = this.tail;
-    this.tail = currNode;
-
+    // Save the node's next link
+    // Swap the node prev and next links.
+    // Set current node to the new 'prev' lin
     while (currNode) {
-      next = currNode.next;
-      currNode.next = prev;
-      prev = currNode;
-      currNode = next;
+      let tempNext = currNode.next;
+      currNode.next = currNode.prev;
+      currNode.prev = tempNext;
+      currNode = currNode.prev;
     }
+    let tempHead = this.head;
+    this.head = this.tail;
+    this.tail = tempHead;
     return this;
   }
 
@@ -243,7 +259,7 @@ class DoublyLinkedList<T> {
     while (currNode) {
       let prevVal = currNode.prev?.val;
       let nextVal = currNode.next?.val;
-      arr.push(`${currNode.val} prev: ${prevVal} curr: ${nextVal}`);
+      arr.push(`val: ${currNode.val} prev: ${prevVal} next: ${nextVal}`);
       currNode = currNode.next;
     }
     console.log(arr);
@@ -263,11 +279,33 @@ class DoublyLinkedList<T> {
 }
 
 let list = new DoublyLinkedList();
-list.push("Foo");
-list.push("Bar")
-list.push("Pushkin")
-list.print()
-let pushkin = list.pop();
-console.log(list.tail.val);
-console.log(pushkin.prev);
+list.push("I")
+list.push("met")
+list.push("a")
+list.push("traveller")
+list.reverse();
+let traveller = list.get(0).val;
+let a = list.get(1).val;
+let met = list.get(2).val;
+let I = list.get(3).val;
+// let doublyLinkedList = new DoublyLinkedList;
+// doublyLinkedList.push(5).push(10).push(15).push(20)
+// doublyLinkedList.print();
+// doublyLinkedList.reverse(); // singlyLinkedList;
+// doublyLinkedList.length; // 4
+// doublyLinkedList.print();
+// if (doublyLinkedList.head) {
+//   let twenty = doublyLinkedList.head.val; // 20
+//   if (doublyLinkedList.head.next) {
+//     let fifteen = doublyLinkedList.head.next.val; // 15
+//
+//     if (doublyLinkedList.head.next.next) {
+//       let ten = doublyLinkedList.head.next.next.val; // 10
+//
+//       if (doublyLinkedList.head.next.next.next) {
+//         let five = doublyLinkedList.head.next.next.next.val; // 5
+//       }
+//     }
+//   }
+// }
 module.exports = { Node, DoublyLinkedList };
