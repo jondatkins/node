@@ -36,13 +36,14 @@ class Stack<T> {
 
   pop(): Node<T> | undefined | null {
     if (!this.first) {
-      return undefined;
+      return null;
     }
     if (this.first.next === null) {
       let oldFirst = this.first;
       this.first = null;
       this.last = null;
       this.size--;
+      oldFirst.next = null;
       return oldFirst;
     }
     else {
@@ -50,17 +51,20 @@ class Stack<T> {
       this.first = oldFirst.next;
       oldFirst.next = null;
       this.size--;
+      oldFirst.next = null;
       return oldFirst;
     }
   }
 
 }
 
-let testStack = new Stack();
-// console.log(testStack.push("I"));
-// console.log(testStack.push("am"));
-// console.log(testStack.push("the"));
-// console.log(testStack.push("very"));
-// console.log(testStack.push("model"));
-
+let stack = new Stack();
+stack.push("Foo");
+stack.push("Bar")
+stack.push("Pushkin")
+// foo, bar, pushkin <- Head
+let pushkin = stack.pop();
+// foo, bar <- Head
+console.log(pushkin);
+console.log(stack.first)
 module.exports = { Node, Stack };
