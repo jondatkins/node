@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/doublyLinkedList.ts",
-    "test": "jest ./tests/doublyLinkedList.test.js"
+    "start": "node --disable-warning=ExperimentalWarning ./modules/stack.ts",
+    "test": "jest ./tests/stack.test.js"
   },
   "keywords": [],
   "author": "",
