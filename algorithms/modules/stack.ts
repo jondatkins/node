@@ -1,8 +1,8 @@
 class Node<T> {
-  public val: T;
+  public value: T;
   public next: Node<T> | null = null;
   constructor(val: T) {
-    this.val = val;
+    this.value = val;
     this.next = null;
   }
 }
@@ -18,8 +18,8 @@ class Stack<T> {
   }
 
   // Add a node to start of stack
-  push(val: T) {
-    let node = new Node<T>(val);
+  push(value: T) {
+    let node = new Node<T>(value);
 
     if (!this.first || !this.last) {
       this.first = node;
@@ -34,37 +34,34 @@ class Stack<T> {
     return ++this.size;
   }
 
-  pop(): Node<T> | undefined | null {
+  pop(): T | undefined | null {
     if (!this.first) {
       return null;
     }
+    let oldFirst = this.first;
     if (this.first.next === null) {
-      let oldFirst = this.first;
-      this.first = null;
       this.last = null;
-      this.size--;
-      oldFirst.next = null;
-      return oldFirst;
     }
-    else {
-      let oldFirst = this.first;
-      this.first = oldFirst.next;
-      oldFirst.next = null;
-      this.size--;
-      oldFirst.next = null;
-      return oldFirst;
-    }
+    this.first = this.first.next;
+    this.size--;
+    return oldFirst.value;
   }
 
 }
 
-let stack = new Stack();
-stack.push("Foo");
-stack.push("Bar")
-stack.push("Pushkin")
-// foo, bar, pushkin <- Head
-let pushkin = stack.pop();
-// foo, bar <- Head
-console.log(pushkin);
-console.log(stack.first)
+// var stack = new Stack();
+//
+// stack.push(10);
+// stack.push(100);
+// stack.push(1000);
+// // 10, 100, 1000
+// var removed = stack.pop();
+// console.log(removed); // 1000
+// console.log(stack.size); // 2
+// let oneHundred = stack.pop();
+// console.log(oneHundred);
+// let ten = stack.pop();
+// console.log(ten);
+// console.log(stack.size);
+// stack.size // 0
 module.exports = { Node, Stack };
