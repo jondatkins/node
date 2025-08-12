@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/queue.ts",
-    "test": "jest ./tests/queue.test.js"
+    "start": "node --disable-warning=ExperimentalWarning ./modules/binarySearchTree.ts",
+    "test": "jest ./tests/binarySearchTree.test.js"
   },
   "keywords": [],
   "author": "",

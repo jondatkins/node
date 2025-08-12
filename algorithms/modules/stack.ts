@@ -1,6 +1,6 @@
 class Node<T> {
   public value: T;
-  public next: Node<T> | null = null;
+  public next: Node<T> | null;
   constructor(val: T) {
     this.value = val;
     this.next = null;
@@ -47,21 +47,22 @@ class Stack<T> {
     return oldFirst.value;
   }
 
+  print(): this {
+    let currNode = this.first;
+    let arr = [];
+    while (currNode) {
+      arr.push(currNode.value + ` ->`);
+      currNode = currNode.next;
+    }
+    console.log(arr);
+    return this;
+  }
+
 }
 
-// var stack = new Stack();
-//
-// stack.push(10);
-// stack.push(100);
-// stack.push(1000);
-// // 10, 100, 1000
-// var removed = stack.pop();
-// console.log(removed); // 1000
-// console.log(stack.size); // 2
-// let oneHundred = stack.pop();
-// console.log(oneHundred);
-// let ten = stack.pop();
-// console.log(ten);
-// console.log(stack.size);
-// stack.size // 0
+let stack = new Stack();
+stack.push("Foo");
+stack.push("Bar")
+stack.push("Pushkin")
+stack.print();
 module.exports = { Node, Stack };
