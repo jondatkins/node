@@ -20,23 +20,23 @@ class BinarySearchTree<T> {
     this.root = null;
   }
 
-  insert(value: T) {
+  insert(value: T): this {
     let newNode = new Node(value);
     if (!this.root) {
       this.root = newNode;
-      return true;
+      return this;
     }
     let currNode = this.root;
     while (currNode) {
       // ignore duplicate values
       if (currNode.value && value === currNode.value) {
-        return undefined;
+        return this;
       }
       // Look at left child
       if (currNode.value && value < currNode.value) {
         if (!currNode.left) {
           currNode.left = newNode;
-          return true;
+          return this;
         }
         else {
           currNode = currNode.left;
@@ -46,14 +46,14 @@ class BinarySearchTree<T> {
         //look at right child
         if (!currNode.right) {
           currNode.right = newNode;
-          return true;
+          return this;
         }
         else {
           currNode = currNode.right;
         }
       }
     }
-    return false;
+    return this;
   }
 
   // This is the same as 'insert', but uses recursion
@@ -93,14 +93,14 @@ class BinarySearchTree<T> {
     return false;
   }
 
-  find(value: T) {
+  find(value: T): Node<T> | undefined {
     if (!this.root) {
-      return false;
+      return undefined;
     }
     let current: Node<T> | null = this.root;
     while (current) {
       if (!current) {
-        return false;
+        return undefined;
       }
       if (current.value && value < current.value) {
         current = current.left;
@@ -109,22 +109,22 @@ class BinarySearchTree<T> {
         current = current.right;
       }
       else {
-        return true;
+        return current;
       }
     }
-    return false;
+    return undefined;
   }
 
   // find with recursion
-  find2(value: T) {
+  find2(value: T): Node<T> | undefined {
     if (!this.root) {
-      return false;
+      return undefined;
     }
     let current: Node<T> = this.root;
 
-    function findHelper(current: Node<T> | null): boolean {
+    function findHelper(current: Node<T> | null): Node<T> | undefined {
       if (!current) {
-        return false;
+        return undefined;
       }
       if (current.value && value < current.value) {
         return findHelper(current.left)
@@ -133,10 +133,172 @@ class BinarySearchTree<T> {
         return findHelper(current.right)
       }
       else {
-        return true;
+        return current;
       }
     }
     return findHelper(current);
+  }
+
+  find3(value: T): Node<T> | false {
+    if (this.root === null) {
+      return false;
+    }
+    let current: Node<T> | null = this.root;
+    let found = false;
+    while (current && !found) {
+      if (current.value && value < current.value) {
+        current = current.left;
+      }
+      else if (current.value && value > current.value) {
+        current = current.right;
+      }
+      else {
+        found = true;
+      }
+    }
+    if (!found || !current) {
+      return false;
+    }
+    return current;
+  }
+
+  findParent(value: T): Node<T> | null {
+    if (!this.root) {
+      return null;
+    }
+    let current: Node<T> = this.root;
+    let currentParent: Node<T> | null = null;
+
+    function findHelper(currentParent: Node<T> | null, current: Node<T> | null): Node<T> | null {
+      if (!current) {
+        return null;
+      }
+      if (current.value && value < current.value) {
+        currentParent = current;
+        return findHelper(currentParent, current.left)
+      }
+      else if (current.value && value > current.value) {
+        currentParent = current;
+        return findHelper(currentParent, current.right)
+      }
+      else {
+        return currentParent;
+      }
+    }
+    let parent = findHelper(currentParent, current);
+    if (parent) {
+      return parent;
+    }
+    return null;
+  }
+
+  remove(value: T): Node<T> | null {
+    if (this.root === null) {
+      return null;
+    }
+    let node = this.find(value);
+    if (!node) {
+      return null;
+    }
+    // save node to return it.
+    let returnNode = node;
+    // Find the parent node
+    let parentNode = this.findParent(value);
+    let parentNodeNewChild = null;
+    // Node to remove is left child of parent
+    if (parentNode && parentNode.left == node) {
+    }
+    // The node to remove has no children, so just remove the parent's link
+    if (node.left === null && node.right === null) {
+      // if you're removing a root node
+      if (!parentNode) { // could do 'node === this.root'
+        this.root = null;
+        return node;
+      }
+      if (parentNode.left === node) {
+        parentNode.left = null;
+        return node;
+      }
+      parentNode.right = null;
+      return node;
+    }
+    // The node has a single child, so just make it's child the child of it's parent.
+    if (node.left !== null && node.right == null) {
+      // we're removing the root node, so make it's child the root.
+      if (!parentNode) {
+        this.root = node.left;
+        node.left = null;
+        return node;
+      }
+      if (parentNode && parentNode.left === node) {
+        parentNode.left = node.left;
+        node.left = null;
+        return node;
+      }
+      else if (parentNode && parentNode.right === node) {
+        parentNode.right = node.left;
+        node.left = null;
+        return node;
+      }
+    }
+    else if (node.right !== null && node.left == null) {
+      if (!parentNode) {
+        this.root = node.right;
+        node.right = null;
+        return node;
+      }
+      if (parentNode && parentNode.left === node) {
+        parentNode.left = node.right;
+        node.right = null;
+        return node;
+      }
+      else if (parentNode && parentNode.right === node) {
+        parentNode.right = node.right;
+        node.right = null;
+        return node;
+      }
+    }
+    // In the case where you have  
+    // two children, find the lowest value node in the subtree
+    // of your node to delete. Swap the values, and remove
+    // the lowest value node.
+    if (node.left !== null && node.right !== null) {
+      let minNode = this.minValue(node);
+      if (!minNode || !minNode.value) {
+        return null;
+      }
+      let parentMin: Node<T> | null = this.findParent(minNode.value);
+      let returnNode = node;
+      node.value = minNode.value;
+      if (parentMin && parentMin.left === minNode) {
+        parentMin.left = null;
+      }
+      if (parentMin && parentMin.right === minNode) {
+        parentMin.right = null;
+      }
+      returnNode.left = null;
+      returnNode.right = null;
+      return returnNode;
+    }
+    return null;
+  }
+
+  minValue(node = this.root) {
+    let current = node;
+    while (current && current.left) {
+      current = current.left;
+    }
+    return current;
+  }
+
+  minValue2(node = this.root): Node<T> | undefined {
+    if (!node) {
+      return undefined;
+    }
+    if (!node.left) {
+      return node;
+    }
+    return this.minValue2(node.left);
   }
 
   print() {
@@ -164,7 +326,7 @@ class BinarySearchTree<T> {
     printHelper(currNode);
   }
 
-  printInOrder(node: Node<T> | null) {
+  printInOrder(node = this.root) {
     if (!node) {
       return;
     }
@@ -173,19 +335,11 @@ class BinarySearchTree<T> {
     this.printInOrder(node.right);
   }
 
-  prettyPrint(node: any, prefix = '', isLeft = true): void {
+  prettyPrint(node = this.root, prefix = '', isLeft = true): void {
     if (node === null) {
       return;
     }
     if (node.right !== null) {
-      // if (isLeft) {
-      //   // prefix += '|   '
-      //   prefix += `${prefix}${'│   '}`
-      // }
-      // else {
-      //   prefix += `${prefix}${'    '}`
-      // }
-      // this.prettyPrint(node.right, prefix, false);
       this.prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
     }
     console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value}`);
@@ -195,45 +349,19 @@ class BinarySearchTree<T> {
   }
 }
 
-let tree = new BinarySearchTree();
-// tree.insert(46)
-// tree.insert(8)
-// tree.insert(71)
-// tree.insert(35)
-// tree.insert(88)
-// tree.insert(48)
-// tree.insert(70)
-// tree.insert(24)
-// tree.insert(85)
-// tree.insert(89)
-// tree.insert(8)
-// tree.insert(91)
-// tree.insert(75)
-// tree.insert(80)
-// tree.insert(76)
-// tree.insert(10)
-// tree.insert(5)
-// tree.insert(13)
-// tree.insert(7)
-// tree.insert(2)
-// tree.insert(16)
-// tree.insert(11);
-// tree.insert(10)
-// tree.prettyPrint(tree.root);
+let binarySearchTree = new BinarySearchTree();
 
-tree.insert(41)
-tree.insert(20)
-tree.insert(65)
-tree.insert(11)
-tree.insert(29)
-tree.insert(50)
-tree.insert(91)
-tree.insert(7)
-tree.insert(12)
-tree.insert(32)
-tree.insert(72)
-tree.insert(99)
-tree.insert(68)
-console.log(tree.find2(7));
-console.log(tree.find2(75));
+binarySearchTree
+  .insert(15)
+  .insert(20)
+  .insert(10)
+  .insert(12)
+  .insert(1)
+  .insert(5)
+  .insert(50);
+// remove node with single child.
+binarySearchTree.prettyPrint();
+// let ten = binarySearchTree.remove(10);
+// binarySearchTree.prettyPrint();
+binarySearchTree.printInOrder();
 module.exports = { BinarySearchTree, Node };
