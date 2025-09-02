@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node --disable-warning=ExperimentalWarning ./modules/binarySearchTree.ts",
-    "test": "jest ./tests/binarySearchTree.test.js"
+    "test": "jest ./tests/binarySearchTree.test.js",
+    "testSingleChild": "jest -t 'remove non root node with single child test' ./tests/binarySearchTree.test.js"
   },
   "keywords": [],
   "author": "",

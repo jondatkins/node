@@ -1,12 +1,18 @@
 const util = require('util')
 
+interface TreeNode {
+  val: number;
+  left: TreeNode | null;
+  right: TreeNode | null;
+}
+
 class Node<T> {
 
-  value: T | null = null;
-  left: Node<T> | null = null;
-  right: Node<T> | null = null;
+  value: number;
+  left: Node<number> | null = null;
+  right: Node<number> | null = null;
 
-  constructor(value: T) {
+  constructor(value: number) {
     this.value = value;
     this.left = null;
     this.right = null;
@@ -20,7 +26,7 @@ class BinarySearchTree<T> {
     this.root = null;
   }
 
-  insert(value: T): this {
+  insert(value: number): this {
     let newNode = new Node(value);
     if (!this.root) {
       this.root = newNode;
@@ -57,7 +63,7 @@ class BinarySearchTree<T> {
   }
 
   // This is the same as 'insert', but uses recursion
-  insert2(value: T) {
+  insert2(value: number) {
     let newNode = new Node(value);
     if (!this.root) {
       this.root = newNode;
@@ -93,7 +99,7 @@ class BinarySearchTree<T> {
     return false;
   }
 
-  find(value: T): Node<T> | undefined {
+  find(value: number): Node<number> | undefined {
     if (!this.root) {
       return undefined;
     }
@@ -116,7 +122,7 @@ class BinarySearchTree<T> {
   }
 
   // find with recursion
-  find2(value: T): Node<T> | undefined {
+  find2(value: number): Node<number> | undefined {
     if (!this.root) {
       return undefined;
     }
@@ -139,7 +145,7 @@ class BinarySearchTree<T> {
     return findHelper(current);
   }
 
-  find3(value: T): Node<T> | false {
+  find3(value: number): Node<number> | false {
     if (this.root === null) {
       return false;
     }
@@ -162,7 +168,7 @@ class BinarySearchTree<T> {
     return current;
   }
 
-  findParent(value: T): Node<T> | null {
+  findParent(value: number): Node<number> | null {
     if (!this.root) {
       return null;
     }
@@ -192,98 +198,112 @@ class BinarySearchTree<T> {
     return null;
   }
 
-  remove(value: T): Node<T> | null {
-    if (this.root === null) {
-      return null;
+  remove(key: number, root = this.root): Node<T> | null {
+    if (root === null) {
+      return root;
     }
-    let node = this.find(value);
-    if (!node) {
-      return null;
+    if (key > root.value) {
+      root.right = this.remove(key, root.right);
     }
-    // save node to return it.
-    let returnNode = node;
-    // Find the parent node
-    let parentNode = this.findParent(value);
-    let parentNodeNewChild = null;
-    // Node to remove is left child of parent
-    if (parentNode && parentNode.left == node) {
+    else if (key < root.value) {
+      root.left = this.remove(key, root.left);
     }
-    // The node to remove has no children, so just remove the parent's link
-    if (node.left === null && node.right === null) {
-      // if you're removing a root node
-      if (!parentNode) { // could do 'node === this.root'
-        this.root = null;
-        return node;
+    else {
+      // Special case for deleting a root node with one or no children
+      if (root === this.root) {
+        if (!root.left && !root.right) {
+          this.root = null;
+          return this.root;
+        }
+        if (root.left && !root.right) {
+          this.root = root.left;
+          return this.root;
+        }
+        if (!root.left && root.right) {
+          this.root = root.right;
+          return this.root;
+        }
       }
-      if (parentNode.left === node) {
-        parentNode.left = null;
-        return node;
+      if (!root.left) {
+        return root.right;
       }
-      parentNode.right = null;
-      return node;
+      else if (!root.right) {
+        return root.left;
+      }
+      let cur = root.right;
+      while (cur.left) {
+        cur = cur.left;
+      }
+      root.value = cur.value;
+      root.right = this.remove(root.value, root.right);
     }
-    // The node has a single child, so just make it's child the child of it's parent.
-    if (node.left !== null && node.right == null) {
-      // we're removing the root node, so make it's child the root.
-      if (!parentNode) {
-        this.root = node.left;
-        node.left = null;
-        return node;
-      }
-      if (parentNode && parentNode.left === node) {
-        parentNode.left = node.left;
-        node.left = null;
-        return node;
-      }
-      else if (parentNode && parentNode.right === node) {
-        parentNode.right = node.left;
-        node.left = null;
-        return node;
-      }
-    }
-    else if (node.right !== null && node.left == null) {
-      if (!parentNode) {
-        this.root = node.right;
-        node.right = null;
-        return node;
-      }
-      if (parentNode && parentNode.left === node) {
-        parentNode.left = node.right;
-        node.right = null;
-        return node;
-      }
-      else if (parentNode && parentNode.right === node) {
-        parentNode.right = node.right;
-        node.right = null;
-        return node;
-      }
-    }
-    // In the case where you have  
-    // two children, find the lowest value node in the subtree
-    // of your node to delete. Swap the values, and remove
-    // the lowest value node.
-    if (node.left !== null && node.right !== null) {
-      let minNode = this.minValue(node);
-      if (!minNode || !minNode.value) {
-        return null;
-      }
-      let parentMin: Node<T> | null = this.findParent(minNode.value);
-      let returnNode = node;
-      node.value = minNode.value;
-      if (parentMin && parentMin.left === minNode) {
-        parentMin.left = null;
-      }
-      if (parentMin && parentMin.right === minNode) {
-        parentMin.right = null;
-      }
-      returnNode.left = null;
-      returnNode.right = null;
-      return returnNode;
-    }
-    return null;
+    return root;
   }
 
-  minValue(node = this.root) {
+  findSecondLargest2(root = this.root): number | undefined {
+    if (root === null) {
+      return;
+    }
+    if (root.left === null && root.right === null) {
+      return;
+    }
+    let parent = root;
+    while (root.right) {
+      parent = root;
+      root = root.right;
+    }
+    return parent.value;
+  }
+
+  findSecondLargest3(root = this.root, parent = this.root): number | undefined {
+    if (!root) {
+      return undefined;
+    }
+    if (root.left === null && root.right === null) {
+      return;
+    }
+    parent = root;
+    function helper(node: Node<number> | null) {
+      if (node && node.right) {
+        parent = node;
+        return helper(node.right);
+      }
+    }
+    helper(root);
+    return parent.value;
+  }
+
+
+  findSecondLargest(root = this.root) {
+    if (!root) return;
+    if (root.left === null && root.right === null) {
+      return;
+    }
+    let count = 0;
+    let result = -1;
+
+    function reverseInOrder(node: Node<number> | null) {
+      if (!node) {
+        return;
+      }
+      reverseInOrder(node.right);
+      // Increment the count of visited nodes
+      count++;
+      // If count becomes 2, then this is
+      // the second largest element
+      if (count === 2) {
+        result = node.value;
+        return;
+      }
+      reverseInOrder(node.left);
+    }
+    // Start reverse inorder traversal
+    reverseInOrder(root);
+
+    return result;
+  }
+
+  minValue(node: Node<T>): Node<T> {
     let current = node;
     while (current && current.left) {
       current = current.left;
@@ -291,6 +311,70 @@ class BinarySearchTree<T> {
     return current;
   }
 
+  // A balanced tree is defined as a tree where the depth of all
+  // leaf nodes or nodes with single children differ by no more than one.
+  isBalancedOld(root = this.root): boolean {
+    let leftTreeHeight = 0;
+    let rightTreeHeight = 0;
+    function balanceHelper(root: Node<number> | null) {
+      if (!root) {
+        return;
+      }
+      leftTreeHeight++;
+      balanceHelper(root.left)
+      balanceHelper(root.right)
+      // rightTreeHeight++;
+    }
+    balanceHelper(root);
+    console.log(`left tree is ${leftTreeHeight}`);
+    console.log(`right tree is ${rightTreeHeight}`);
+    return true;
+  }
+
+  findHeight(node = this.root): number {
+    if (!node) {
+      return -1;
+    }
+    let lefth = this.findHeight(node.left);
+    let righth = this.findHeight(node.right);
+
+    if (lefth > righth) {
+      return lefth + 1;
+    } else {
+      return righth + 1;
+    }
+  }
+
+  checkHeightAndBalance(node: Node<T> | null): number {
+    if (!node) {
+      return 0;
+    }
+    let leftHeight = this.checkHeightAndBalance(node.left);
+
+    if (leftHeight === -1) {
+      return -1;
+    }
+    let rightHeight = this.checkHeightAndBalance(node.right);
+
+    if (rightHeight === -1) {
+      return -1;
+    }
+    if (Math.abs(leftHeight - rightHeight) > 1) {
+      return -1;
+    }
+    // console.log(`${Math.max(leftHeight, rightHeight) + 1}`);
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  isBalanced() {
+    if (!this.root) {
+      return true;
+    }
+    let heightAndBalance = this.checkHeightAndBalance(this.root);
+    return this.checkHeightAndBalance(this.root) != -1;
+  }
+
+  // A recursive alternative
   minValue2(node = this.root): Node<T> | undefined {
     if (!node) {
       return undefined;
@@ -349,19 +433,17 @@ class BinarySearchTree<T> {
   }
 }
 
-let binarySearchTree = new BinarySearchTree();
-
-binarySearchTree
-  .insert(15)
-  .insert(20)
-  .insert(10)
-  .insert(12)
-  .insert(1)
-  .insert(5)
-  .insert(50);
-// remove node with single child.
-binarySearchTree.prettyPrint();
-// let ten = binarySearchTree.remove(10);
-// binarySearchTree.prettyPrint();
-binarySearchTree.printInOrder();
+let binarySearchTree2 = new BinarySearchTree();
+binarySearchTree2.insert(5);
+binarySearchTree2.prettyPrint();
+let bal = binarySearchTree2.isBalanced(); // true
+console.log(`should be true: ${bal}`);
+binarySearchTree2.insert(6);
+binarySearchTree2.prettyPrint();
+let bal2 = binarySearchTree2.isBalanced(); // true
+console.log(`should be true: ${bal2}`);
+binarySearchTree2.insert(7);
+binarySearchTree2.prettyPrint();
+let bal3 = binarySearchTree2.isBalanced(); // false
+console.log(`should be false: ${bal3}`);
 module.exports = { BinarySearchTree, Node };

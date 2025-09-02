@@ -98,8 +98,8 @@ test(`remove leaf node test`, () => {
     .insert(5)
     .insert(50);
   // remove leaf nodes
-  binarySearchTree.remove(50);
-  binarySearchTree.remove(5);
+  binarySearchTree.remove(50, binarySearchTree.root);
+  binarySearchTree.remove(5, binarySearchTree.root);
   expect(binarySearchTree.root.right.right).toEqual(null)
   expect(binarySearchTree.root.left.left.right).toEqual(null)
 })
@@ -114,8 +114,18 @@ test(`remove single child test`, () => {
     .insert(5)
     .insert(50);
   // remove node with single child.
-  binarySearchTree.remove(20);
+  binarySearchTree.remove(20, binarySearchTree.root);
   expect(binarySearchTree.root.right.value).toEqual(50)
+})
+test(`remove root with two child test`, () => {
+  let binarySearchTree = new searchTree.BinarySearchTree();
+  binarySearchTree
+    .insert(15)
+    .insert(20)
+    .insert(10)
+  binarySearchTree.remove(15, binarySearchTree.root);
+  expect(binarySearchTree.root.value).toEqual(20)
+  expect(binarySearchTree.root.left.value).toEqual(10)
 })
 test(`remove root with single child test`, () => {
   let binarySearchTree = new searchTree.BinarySearchTree();
@@ -123,11 +133,15 @@ test(`remove root with single child test`, () => {
     .insert(15)
     .insert(20)
   // remove node with single child.
-  let fifteen = binarySearchTree.remove(15);
+  binarySearchTree.remove(15, binarySearchTree.root);
   expect(binarySearchTree.root.value).toEqual(20)
-  expect(fifteen.value).toEqual(15)
-  expect(fifteen.right).toEqual(null)
-  expect(fifteen.left).toEqual(null)
+})
+test(`remove root with no child test`, () => {
+  let binarySearchTree = new searchTree.BinarySearchTree();
+  binarySearchTree
+    .insert(15)
+  binarySearchTree.remove(15, binarySearchTree.root);
+  expect(binarySearchTree.root).toEqual(null)
 })
 test(`remove non root node with single child test`, () => {
   let binarySearchTree = new searchTree.BinarySearchTree();
@@ -140,11 +154,8 @@ test(`remove non root node with single child test`, () => {
     .insert(5)
     .insert(50);
   // remove node with single child.
-  let twenty = binarySearchTree.remove(20);
+  binarySearchTree.remove(20, binarySearchTree.root);
   expect(binarySearchTree.root.right.value).toEqual(50)
-  expect(twenty.right).toEqual(null)
-  expect(twenty.left).toEqual(null)
-  expect(twenty.value).toEqual(20)
 })
 test(`remove node with two children`, () => {
   let binarySearchTree = new searchTree.BinarySearchTree();
@@ -157,11 +168,9 @@ test(`remove node with two children`, () => {
     .insert(5)
     .insert(50);
   // remove node with single child.
-  let ten = binarySearchTree.remove(10);
-  expect(binarySearchTree.root.left.value).toEqual(5)
-  expect(binarySearchTree.root.left.left).toEqual(null)
-  expect(ten.right).toEqual(null)
-  expect(ten.left).toEqual(null)
+  let ten = binarySearchTree.remove(10, binarySearchTree.root);
+  expect(binarySearchTree.root.left.value).toEqual(12)
+  expect(binarySearchTree.root.left.right).toEqual(null)
 })
 test(`find min`, () => {
   let binarySearchTree = new searchTree.BinarySearchTree();
@@ -173,7 +182,7 @@ test(`find min`, () => {
     .insert(1)
     .insert(5)
     .insert(50);
-  expect(binarySearchTree.minValue().value).toEqual(1);
+  expect(binarySearchTree.minValue(binarySearchTree.root).value).toEqual(1);
   let ten = binarySearchTree.find(10);
   expect(binarySearchTree.minValue(ten).value).toEqual(1);
   expect(binarySearchTree.minValue2().value).toEqual(1);
@@ -195,4 +204,37 @@ test(`find parent`, () => {
   expect(fifteen.value).toEqual(15);
   expect(nullValue).toEqual(null);
   expect(twenty.value).toEqual(20);
+})
+test(`find second largest`, () => {
+  let binarySearchTree = new searchTree.BinarySearchTree();
+  binarySearchTree.insert(15);
+  binarySearchTree.insert(20);
+  binarySearchTree.insert(10);
+  binarySearchTree.insert(12);
+  binarySearchTree.insert(16);
+  let secondLargest = binarySearchTree.findSecondLargest(); // returns 15
+  expect(secondLargest).toEqual(16);
+  let binarySearchTree2 = new searchTree.BinarySearchTree();
+  binarySearchTree2.insert(10);
+  let secondLargest2 = binarySearchTree2.findSecondLargest(); // returns undefined
+  expect(secondLargest2).toEqual(undefined);
+})
+test(`isBalanced`, () => {
+  let binarySearchTree = new searchTree.BinarySearchTree();
+  binarySearchTree.insert(15);
+  binarySearchTree.insert(20);
+  binarySearchTree.insert(10);
+  binarySearchTree.insert(12);
+  let bal = binarySearchTree.isBalanced(); // true
+  expect(bal).toEqual(true)
+  let binarySearchTree2 = new searchTree.BinarySearchTree();
+  binarySearchTree2.insert(5);
+  let bal2 = binarySearchTree2.isBalanced(); // true
+  expect(bal2).toEqual(true)
+  binarySearchTree2.insert(6);
+  binarySearchTree2.isBalanced(); // true
+  expect(bal2).toEqual(true)
+  binarySearchTree2.insert(7);
+  let bal3 = binarySearchTree2.isBalanced(); // false
+  expect(bal3).toEqual(false)
 })
