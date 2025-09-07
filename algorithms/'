@@ -11,6 +11,8 @@ class Node<T> {
     this.right = null;
     this.height = 1;
   }
+
+
 }
 
 class BinarySearchTree<T> {
@@ -33,33 +35,35 @@ class BinarySearchTree<T> {
     if (!node) {
       return 0;
     }
-    return this.getHeight(node.right) - this.getHeight(node.left);
+    return this.getHeight(node.left) - this.getHeight(node.right);
   }
 
-  rightRotate(oldRoot: Node<T>): Node<T> | null {
-    let newRoot = oldRoot.left;
-    let newRootRight = null;
-    if (newRoot) {
-      newRootRight = newRoot.right;
-      newRoot.right = oldRoot;
+  rightRotate(y: Node<T>): Node<T> | null {
+    // console.log(`Rotate right on node, ${y.value}`);
+    let x = y.left;
+    if (!x) {
+      return null;
     }
-    oldRoot.left = newRootRight;
-    oldRoot.height = 1 + Math.max(this.getHeight(oldRoot.left), this.getHeight(oldRoot.right))
-    if (newRoot) newRoot.height = 1 + Math.max(this.getHeight(newRoot.left), this.getHeight(newRoot.right))
-    return newRoot;
+    let T2 = x.right;
+    x.right = y;
+    y.left = T2;
+    y.height = 1 + Math.max(this.getHeight(y.left), this.getHeight(y.right))
+    x.height = 1 + Math.max(this.getHeight(x.left), this.getHeight(x.right))
+    return x;
   }
 
-  leftRotate(oldRoot: Node<T>): Node<T> | null {
-    let newRoot = oldRoot.right;
-    let newRootLeft = null;
-    if (newRoot) {
-      newRootLeft = newRoot.left;
-      newRoot.left = oldRoot;
+  leftRotate(x: Node<T>): Node<T> | null {
+    // console.log(`Rotate left on node, ${x.value}`);
+    let y = x.right;
+    if (!y) {
+      return null;
     }
-    oldRoot.right = newRootLeft;
-    oldRoot.height = 1 + Math.max(this.getHeight(oldRoot.left), this.getHeight(oldRoot.right))
-    if (newRoot) newRoot.height = 1 + Math.max(this.getHeight(newRoot.left), this.getHeight(newRoot.right))
-    return newRoot;
+    let T2 = y.left;
+    y.left = x;
+    x.right = T2;
+    x.height = 1 + Math.max(this.getHeight(x.left), this.getHeight(x.right))
+    y.height = 1 + Math.max(this.getHeight(y.left), this.getHeight(y.right))
+    return y;
   }
 
   delete(data: T, node = this.root) {
@@ -102,7 +106,43 @@ class BinarySearchTree<T> {
     return node;
   }
 
+  insert2(value: T): this {
+    let newNode = new Node(value);
+    if (!this.root) {
+      this.root = newNode;
+      return this;
+    }
+    let currNode = this.root;
+    while (currNode) {
+      // ignore duplicate values
+      if (currNode.value && value === currNode.value) {
+        return this;
+      }
+      // Look at left child
+      if (currNode.value && value < currNode.value) {
+        if (!currNode.left) {
+          currNode.left = newNode;
+          return this;
+        }
+        else {
+          currNode = currNode.left;
+        }
+      }
+      else {
+        //look at right child
+        if (!currNode.right) {
+          currNode.right = newNode;
+          return this;
+        }
+        else {
+          currNode = currNode.right;
+        }
+      }
+    }
+    return this;
+  }
 
+  // This is the same as 'insert', but uses recursion
   insert(value: T) {
     let newNode = new Node(value);
     if (!this.root) {
@@ -131,8 +171,6 @@ class BinarySearchTree<T> {
           insertHelper(currNode.right, currNode);
         }
       }
-
-      currNode.height = 1 + Math.max(this.getHeight(currNode.left), this.getHeight(currNode.right))
       if (this.balanced) {
         this.insertBalance(currNode, parentNode);
       }
@@ -141,15 +179,14 @@ class BinarySearchTree<T> {
     return insertHelper(this.root, null);
   }
 
-  // If the node's balance is less than zero, it's left heavy
   insertBalance(node: Node<T>, parentNode: Node<T> | null) {
     // Update the balance factor and balance the tree
     node.height = 1 + Math.max(this.getHeight(node.left), this.getHeight(node.right))
     let balance = this.getBalance(node);
-    // console.log(`${node.value} has balance ${balance}`);
+
     // Balancing the tree
     // Left Left
-    if (balance < -1 && this.getBalance(node.left) <= 0) {
+    if (balance > 1 && this.getBalance(node.left) >= 0) {
       let rightRotNode = this.rightRotate(node);
       if (parentNode) {
         if (node === parentNode.left) {
@@ -166,7 +203,7 @@ class BinarySearchTree<T> {
       return rightRotNode;
     }
     // Left Right
-    if (node.left && balance < -1 && this.getBalance(node.left) > 0) {
+    if (node.left && balance > 1 && this.getBalance(node.left) < 0) {
       node.left = this.leftRotate(node.left);
       let leftRotNode = this.rightRotate(node);
       if (parentNode) {
@@ -185,7 +222,7 @@ class BinarySearchTree<T> {
     }
 
     // Right Right
-    if (balance > 1 && this.getBalance(node.right) >= 0) {
+    if (balance < -1 && this.getBalance(node.right) <= 0) {
       let leftRotNode = this.leftRotate(node);
       if (parentNode) {
         if (node === parentNode.left) {
@@ -202,7 +239,7 @@ class BinarySearchTree<T> {
       return leftRotNode;
     }
     // Right Left
-    if (node.right && balance > 1 && this.getBalance(node.right) < 0) {
+    if (node.right && balance < -1 && this.getBalance(node.left) > 0) {
       node.right = this.rightRotate(node.right);
       let rightRotNode = this.leftRotate(node);
       if (parentNode) {
@@ -485,44 +522,19 @@ class BinarySearchTree<T> {
     if (node === null) {
       return;
     }
-    node.height = 1 + Math.max(this.getHeight(node.left), this.getHeight(node.right))
-    let balance = this.getBalance(node);
-
     if (node.right !== null) {
       this.prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
     }
-    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value} ${balance}`);
+    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value}`);
     if (node.left !== null) {
       this.prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
     }
   }
-
-  treeTest(treeData: T[]) {
-    treeData.forEach(letter => {
-      this.insert(letter);
-    })
-    this.prettyPrint();
-  }
 }
 
-const treeTester = <T>(treeData: T[], rotationInfo: string) => {
-  let unbalancedTree = new BinarySearchTree(false);
-  let balancedTree = new BinarySearchTree(true);
-
-  treeData.forEach(letter => {
-    unbalancedTree.insert(letter);
-    balancedTree.insert(letter);
-  })
-  console.log(`${rotationInfo}`);
-  console.log(`unbalanced tree`);
-  unbalancedTree.prettyPrint();
-  console.log(`balanced tree`);
-  balancedTree.prettyPrint();
-  console.log('\n\n');
-}
-
+let binarySearchTree2 = new BinarySearchTree();
+// Q is left heavy, and P is left heavy, so do a single right rotation
 let leftLeft = ['Q', 'P', 'D']
-treeTester(leftLeft, "Q is left heavy, and it's left child is left heavy, so right rotate around Q");
 // unbalanced leftLeft should look like this:
 //
 // └── Q
@@ -535,7 +547,6 @@ treeTester(leftLeft, "Q is left heavy, and it's left child is left heavy, so rig
 //     └── D
 //
 let leftLeft2 = ['P', 'D', 'Q', 'C', 'L', 'B']
-treeTester(leftLeft2, 'P is left heavy, as is D, so this LL and you right rotate P');
 // unbalanced leftLeft2 is:
 // │   ┌── Q
 // └── P
@@ -552,15 +563,12 @@ treeTester(leftLeft2, 'P is left heavy, as is D, so this LL and you right rotate
 //     └── C
 //         └── B
 // rightRight is A - B - D, if unbalanced.
-//
 let rightRight = ['A', 'B', 'D']
-treeTester(rightRight, "This is a right-right tree, so A and B are right heavy");
 // when balanced it should be:
 // │   ┌── D
 // └── B
 //     └── A
 let rightRight2 = ['B', 'A', 'D', 'E', 'C', 'F']
-treeTester(rightRight2, "B is right heavy, and so is D, so one left rotation around B");
 // Balanced version is :
 // │       ┌── F
 // │   ┌── E
@@ -569,32 +577,15 @@ treeTester(rightRight2, "B is right heavy, and so is D, so one left rotation aro
 //     └── B
 //         └── A
 let leftRight = ['Q', 'E', 'K']
-treeTester(leftRight, "This is LR, so Q is left heavy, but it's right child is right heavy. Left rotate on the left child, then right rotate Q.");
-// balanced :
 // │   ┌── Q
 // └── K
 //     └── E
-let leftRight2 = ['K', 'E', 'Q', 'C', 'F', 'G'];
-treeTester(leftRight2, "This is LR again, so left rotate the left child, and right rotate the parent K");
-let rightLeft = ['A', 'F', 'B'];
-treeTester(rightLeft, "This is RL, so F is right rotated, and A is left rotated");
-// unbalanced
-// │   ┌── F
-// └── B
-//     └── A
-let rightLeft2 = ['B', 'A', 'F', 'G', 'E', 'D'];
-treeTester(rightLeft2, "RL: F is rotated right, B left");
-// │       ┌── G
-// │   ┌── F
-// └── E
-//     │   ┌── D
-//     └── B
-//         └── A
-// Extra test data
-let letters = ['C', 'B', 'E', 'A', 'D', 'H', 'G', 'F']
-treeTester(letters, "Some more tests from the W3 site");
-let letters2 = ['B', 'E', 'G', 'F', 'P', 'I', 'K', 'M']
-treeTester(letters2, "Some more tests from the W3 site");
-let letters3 = ['C', 'F', 'G']
-treeTester(letters3, "Some more tests from the W3 site");
+let leftRight2 = ['K', 'E', 'Q', 'C', 'F'];
+leftRight.forEach(letter => {
+  binarySearchTree2.insert(letter);
+})
+binarySearchTree2.prettyPrint();
+// let letters = ['C', 'B', 'E', 'A', 'D', 'H', 'G', 'F']
+// let letters2 = ['B', 'E', 'G', 'F', 'P', 'I', 'K', 'M']
+// let letters3 = ['C', 'F', 'G']
 module.exports = { BinarySearchTree, Node };
