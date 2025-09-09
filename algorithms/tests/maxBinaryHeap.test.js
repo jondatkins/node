@@ -22,3 +22,21 @@ test(`test heap recursive insert method`, () => {
   expect(binHeap.values[0]).toEqual(55)
   expect(binHeap.values[1]).toEqual(39)
 })
+test(`extractMax`, () => {
+  let testData = [41, 39, 33, 18, 27, 12, 55];
+  let binHeap = new heap.BinaryHeap();
+  for (const val of testData) {
+    binHeap.insert2(val);
+  }
+  expect(binHeap.extractMax()).toEqual(55)
+  expect(binHeap.values[0]).toEqual(41)
+})
+test(`extractMax one value`, () => {
+  let testData = [41];
+  let binHeap = new heap.BinaryHeap();
+  for (const val of testData) {
+    binHeap.insert2(val);
+  }
+  expect(binHeap.extractMax()).toEqual(41)
+  expect(binHeap.extractMax()).toEqual(undefined)
+})
