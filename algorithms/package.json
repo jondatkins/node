@@ -7,9 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/maxBinaryHeap.ts",
-    "test": "jest ./tests/maxBinaryHeap.test.js",
-    "testSingleChild": "jest -t 'remove non root node with single child test' ./tests/maxBinaryHeap.test.js"
+    "start": "node --disable-warning=ExperimentalWarning ./modules/HashMap.ts",
+    "test": "jest ./tests/HashMap.test.js",
+    "testSingleChild": "jest -t 'remove non root node with single child test' ./tests/HashMap.test.js"
   },
   "keywords": [],
   "author": "",
