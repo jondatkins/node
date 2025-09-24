@@ -7,9 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/HashMap.ts",
-    "test": "jest ./tests/HashMap.test.js",
-    "testSingleChild": "jest -t 'remove non root node with single child test' ./tests/HashMap.test.js"
+    "start": "node --disable-warning=ExperimentalWarning ./modules/Graph.ts",
+    "test": "jest ./tests/Graph.test.js",
+    "testSingleChild": "jest -t 'remove non root node with single child test' ./tests/Graph.test.js"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-typescript": "^7.27.1",
     "@tsconfig/node20": "^20.1.5",
+    "@types/node": "^24.5.2",
     "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
     "performance-now": "^2.1.0"
