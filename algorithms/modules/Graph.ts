@@ -46,6 +46,22 @@ class Graph<T extends string | number> {
     delete this.adjacencyList[vertex];
   }
 
+  depthFirstSearchCourseOriginal(start: T) {
+    let results: T[] = [];
+    const visited = { start: false };
+    const adjacencyList = this.adjacencyList;
+    (function dfs(vertex: T) {
+      if (!vertex) {
+        return null;
+      }
+      visited[vertex] = true;
+      results.push(vertex);
+      adjacencyList[vertex].forEach(neighbour => {
+        if (!visited[neighbour]) { return dfs(neighbour); }
+      })
+    })(start) return results;
+  }
+
   depthFirstSearch(vertex: T) {
     let results: T[] = [];
     const searchHelper = (vertex: T) => {
@@ -101,7 +117,6 @@ class Graph<T extends string | number> {
         }
       }
     })(start)
-
     // dfs(start);
     return results;
   }
