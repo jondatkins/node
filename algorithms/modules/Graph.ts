@@ -59,7 +59,8 @@ class Graph<T extends string | number> {
       adjacencyList[vertex].forEach(neighbour => {
         if (!visited[neighbour]) { return dfs(neighbour); }
       })
-    })(start) return results;
+    })(start)
+    return results;
   }
 
   depthFirstSearch(vertex: T) {
@@ -101,6 +102,7 @@ class Graph<T extends string | number> {
     return results;
   }
 
+
   depthFirstSearchCourse2(start: T): T[] {
     const results: T[] = [];
     const visited: Record<string, boolean> = {}; // or Map<T, boolean>
@@ -121,6 +123,109 @@ class Graph<T extends string | number> {
     return results;
   }
 
+  depthFirstSearchIterative(start: T): T[] {
+    let stack: T[] = [start];
+    const results: T[] = [];
+    const visited: Record<string, boolean> = {}; // or Map<T, boolean>
+    visited[String(start)] = true;
+    let currentVertex;
+    while (stack.length > 0) {
+      currentVertex = stack.pop();
+      if (currentVertex === undefined) continue;
+      results.push(currentVertex);
+      for (const neighbour of this.adjacencyList[currentVertex]) {
+        if (!visited[String(neighbour)]) {
+          visited[String(neighbour)] = true;
+          stack.push(neighbour);
+        }
+      }
+    }
+    return results;
+  }
+
+  depthFirstSearchIterativeCourse(start: string): T[] {
+    const stack = [start];
+    const result = [];
+    const visited = {};
+    let currentVertex;
+    visited[start] = true;
+    while (stack.length) {
+      console.log(stack);
+      currentVertex = stack.pop();
+      result.push(currentVertex);
+      this.adjacencyList[currentVertex].forEach(neighbour => {
+        if (!visited[neighbour]) {
+          visited[neighbour] = true
+          stack.push(neighbour);
+        }
+      });
+    }
+    return result;
+  }
+
+  depthFirstSearchIterativeChatGpt(start: T): T[] {
+    const stack: T[] = [start];
+    const results: T[] = [];
+    const visited: Record<string, boolean> = { [String(start)]: true };
+
+    while (stack.length > 0) {
+      const currentVertex = stack.pop();
+      if (currentVertex === undefined) continue; // type guard
+
+      results.push(currentVertex);
+
+      for (const neighbour of this.adjacencyList[currentVertex]) {
+        if (!visited[String(neighbour)]) {
+          visited[String(neighbour)] = true;
+          stack.push(neighbour);
+        }
+      }
+    }
+    return results;
+  }
+
+  breadthFirstSearch(start: T): T[] {
+    const queue: T[] = [start];
+    const results: T[] = [];
+    const visited: Record<string, boolean> = {}; // or Map<T, boolean>
+    visited[String(start)] = true;
+    let currentNode: T | undefined;
+
+    while (queue.length) {
+      currentNode = queue.shift();
+      if (currentNode === undefined) continue;
+      results.push(currentNode);
+      this.adjacencyList[currentNode].forEach(neighbour => {
+        if (!visited[String(neighbour)]) {
+          visited[String(neighbour)] = true;
+          if (neighbour) {
+            queue.push(neighbour);
+          }
+        }
+      })
+    }
+    return results;
+  }
+
+  breadthFirstSearchRecursive(start: T): T[] {
+    const queue: T[] = [start];
+    const results: T[] = [];
+    const visited: Record<string, boolean> = {}; // or Map<T, boolean>
+    visited[String(start)] = true;
+    const adjacencyList = this.adjacencyList;
+
+    (function bfs(vertex: T) {
+      if (!vertex) return null;
+      visited[String(vertex)] = true;
+      results.push(vertex);
+      adjacencyList[vertex].forEach(neighbour => {
+        if (!visited[String(neighbour)]) {
+          return bfs(neighbour);
+        }
+      });
+    })(start)
+    return results;
+  }
 
 }
 
@@ -155,7 +260,6 @@ testGraph.addEdge("D", "E")
 testGraph.addEdge("D", "F")
 testGraph.addEdge("E", "F")
 let depthFirst1 = testGraph.depthFirstSearch("A")
-// console.log(depthFirst1);
 
 // B - A - C
 // |       |
@@ -178,6 +282,10 @@ testGraph2.addEdge("C", "E")
 testGraph2.addEdge("D", "E")
 testGraph2.addEdge("D", "F")
 testGraph2.addEdge("F", "E")
-let depthFirst = testGraph2.depthFirstSearchCourse("A")
-console.log(depthFirst);
+// let depthFirst = testGraph2.depthFirstSearchIterative("A") // [ 'A', 'C', 'E', 'F', 'D', 'B' ]
+// let depthFirst2 = testGraph2.depthFirstSearchCourse2("A") // [ 'A', 'B', 'D', 'E', 'C', 'F' ]
+let breadthFirstSearch = testGraph2.breadthFirstSearch("A") // [ 'A', 'B', 'D', 'E', 'C', 'F' ]
+let breadthFirstSearch2 = testGraph2.breadthFirstSearchRecursive("A") // [ 'A', 'B', 'D', 'E', 'C', 'F' ]
+console.log(breadthFirstSearch);
+console.log(breadthFirstSearch2);
 module.exports = { Graph };
