@@ -7,9 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/Graph.ts",
-    "test": "jest ./tests/Graph.test.js",
-    "testSingleChild": "jest -t 'remove non root node with single child test' ./tests/Graph.test.js"
+    "start": "node --disable-warning=ExperimentalWarning ./modules/WeightedGraph.ts",
+    "test": "jest ./tests/WeightedGraph.test.js",
+    "testSingleChild": "jest -t 'remove non root node with single child test' ./tests/WeightedGraph.test.js"
   },
   "keywords": [],
   "author": "",
