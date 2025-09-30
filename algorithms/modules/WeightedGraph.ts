@@ -27,10 +27,11 @@ class WeightedGraph<T extends string | number> {
 
   shortestPath(startNode: T, endNode: T) {
     let distances: Record<T, number> = {} as Record<T, number>;
-    distances[startNode] = 0;
     for (const node in this.adjacencyList) {
       distances[node] = Infinity;
     }
+    distances[startNode] = 0;
+
     // Add each vertex to the priorityQueue,
     // Make each priority 'Infinity', except
     // the starting vertx, which is 0.
@@ -41,25 +42,33 @@ class WeightedGraph<T extends string | number> {
       }
     }
     priorityQueue.enqueue(startNode, 0);
+    // console.dir(priorityQueue, { depth: null, colors: true });
+
     // create previous object.
     let previous: Record<T, T | null> = {} as Record<T, T>;
     for (const node in this.adjacencyList) {
       previous[node] = null;
     }
+    // console.dir(previous, { depth: null, colors: true });
     while (priorityQueue.length) {
       // vertex is {'x':someNum}
-      let vertex: { string: number } = priorityQueue.dequeue();
-      let vertexKey = Object.keys(vertex)[0];
-      if (vertexKey === endNode) {
+      let vertex = priorityQueue.dequeue();
+      if (vertex.val === endNode) {
         break;
       }
-      let adjList = this.adjacencyList[vertexKey as T];
+      // Get the neighbouring nodes for this node.
+      let adjList = this.adjacencyList[vertex.val];
       // Calculate the distance to that vertex from
       // the starting vertex.
       adjList.forEach((value, index) => {
-
+        if (value.weight < distances[value.node]) {
+          distances[value.node] = value.weight;
+          previous[value.node] = vertex.val;
+          priorityQueue.enqueue(value.node, value.weight)
+        }
       });
     }
+    return distances[endNode];
   }
 }
 
@@ -79,7 +88,9 @@ graph.addEdge("D", "E", 3)
 graph.addEdge("C", "F", 4)
 graph.addEdge("D", "F", 1)
 graph.addEdge("F", "E", 1)
-console.dir(graph, { depth: null, colors: true });
+// console.dir(graph, { depth: null, colors: true });
+let shortest = graph.shortestPath("A", "E") // Should be '6', A-C-D-F-E
+console.log(shortest);
 // console.log(util.inspect(graph, { depth: null, colors: true }));
 // console.log(JSON.stringify(graph, null, 2))
 // module.exports = { WeightedGraph };
