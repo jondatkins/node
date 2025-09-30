@@ -1,4 +1,3 @@
-const util = require("util");
 
 interface WeightedEdge<T> {
   node: T;
