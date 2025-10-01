@@ -31,7 +31,7 @@ class WeightedGraph<T extends string | number> {
       distances[node] = Infinity;
     }
     distances[startNode] = 0;
-
+    let visited: string[] = [];
     // Add each vertex to the priorityQueue,
     // Make each priority 'Infinity', except
     // the starting vertx, which is 0.
@@ -61,13 +61,27 @@ class WeightedGraph<T extends string | number> {
       // Calculate the distance to that vertex from
       // the starting vertex.
       adjList.forEach((value, index) => {
-        if (value.weight < distances[value.node]) {
-          distances[value.node] = value.weight;
+        if (visited.indexOf(value.node) === -1 && value.weight < distances[value.node]) {
+          let newDist = value.weight;
+          let prev = previous[vertex.val];
+          if (prev) {
+            newDist = newDist + distances[vertex.val]
+          }
+          if (newDist < distances[value.node]) {
+            distances[value.node] = newDist;
+          }
+          // else {
+          //   distances[value.node] = value.weight;
+          // }
           previous[value.node] = vertex.val;
           priorityQueue.enqueue(value.node, value.weight)
         }
       });
+      visited.push(vertex.val);
     }
+    console.dir(distances, { depth: null, colors: true })
+    console.dir(previous, { depth: null, colors: true })
+    console.dir(visited, { depth: null, colors: true })
     return distances[endNode];
   }
 }
