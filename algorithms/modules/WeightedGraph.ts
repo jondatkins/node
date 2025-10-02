@@ -27,13 +27,9 @@ class WeightedGraph<T extends string | number> {
 
   shortestPath(startNode: T, endNode: T) {
     let distances: Record<T, number> = {} as Record<T, number>;
-    let visited: string[] = [];
-    // Add each vertex to the priorityQueue,
-    // Make each priority 'Infinity', except
-    // the starting vertx, which is 0.
     let priorityQueue = new SimplePriorityQueue();
     let previous: Record<T, T | null> = {} as Record<T, T>;
-
+    let path = [] //to return at end
     for (const node in this.adjacencyList) {
       if (node !== startNode) {
         distances[node] = Infinity;
@@ -45,41 +41,36 @@ class WeightedGraph<T extends string | number> {
       }
       previous[node] = null;
     }
-    let vertex: typeof INode;
+    let smallest: T;
     // create previous object.
     while (priorityQueue.length) {
-      // vertex is {'x':someNum}
-      vertex = priorityQueue.dequeue();
-      if (vertex.value === endNode) {
+
+      smallest = priorityQueue.dequeue().value;
+      if (smallest === endNode) {
+        while (previous[smallest]) {
+          path.push(smallest);
+          smallest = previous[smallest] as T;
+        }
         break;
       }
-      let vertValue: T = vertex.value;
       // Get the neighbouring nodes for this node.
-      let adjList: WeightedEdge<T>[] = this.adjacencyList[vertValue];
-      // Calculate the distance to that vertex from
-      // the starting vertex.
-      // addjList is an array of objects where the key is the node name
-      // and the value is the weight of the edge
-      if (vertex.val || distances[vertValue] !== Infinity) {
-        adjList.forEach((value: WeightedEdge<T>) => {
-          let newDist = value.weight;
-          let prev = previous[vertValue];
-          // if (prev) {
-          newDist = newDist + distances[vertValue]
-          // }
-          if (newDist < distances[value.node]) {
-            distances[value.node] = newDist;
+      let adjList: WeightedEdge<T>[] = this.adjacencyList[smallest];
+      if (smallest || distances[smallest] !== Infinity) {
+        adjList.forEach((neighbour: WeightedEdge<T>) => {
+          let candidate = neighbour.weight + distances[smallest]
+          if (candidate < distances[neighbour.node]) {
+            distances[neighbour.node] = candidate;
+            previous[neighbour.node] = smallest;
+            priorityQueue.enqueue(neighbour.node, neighbour.weight)
           }
-          previous[value.node] = vertex.value;
-          priorityQueue.enqueue(value.node, value.weight)
         });
       }
-      visited.push(vertex.value);
+      // visited.push(vertex.neighbour);
     }
     console.dir(distances, { depth: null, colors: true })
     console.dir(previous, { depth: null, colors: true })
-    console.dir(visited, { depth: null, colors: true })
-    return distances[endNode];
+    // return distances[endNode];
+    return path.concat(smallest).reverse();
   }
 }
 
