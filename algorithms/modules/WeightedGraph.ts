@@ -1,5 +1,5 @@
 // import { SimplePriorityQueue } from "./simplePriorityQueue.js"
-const { SimplePriorityQueue } = require("./simplePriorityQueue.js");
+const { SimplePriorityQueue, INode } = require("./SimplePriorityQueue.ts");
 
 interface WeightedEdge<T> {
   node: T;
@@ -27,57 +27,54 @@ class WeightedGraph<T extends string | number> {
 
   shortestPath(startNode: T, endNode: T) {
     let distances: Record<T, number> = {} as Record<T, number>;
-    for (const node in this.adjacencyList) {
-      distances[node] = Infinity;
-    }
-    distances[startNode] = 0;
     let visited: string[] = [];
     // Add each vertex to the priorityQueue,
     // Make each priority 'Infinity', except
     // the starting vertx, which is 0.
     let priorityQueue = new SimplePriorityQueue();
+    let previous: Record<T, T | null> = {} as Record<T, T>;
+
     for (const node in this.adjacencyList) {
       if (node !== startNode) {
+        distances[node] = Infinity;
         priorityQueue.enqueue(node, Infinity);
       }
-    }
-    priorityQueue.enqueue(startNode, 0);
-    // console.dir(priorityQueue, { depth: null, colors: true });
-
-    // create previous object.
-    let previous: Record<T, T | null> = {} as Record<T, T>;
-    for (const node in this.adjacencyList) {
+      else {
+        distances[node] = 0;
+        priorityQueue.enqueue(node, 0);
+      }
       previous[node] = null;
     }
-    // console.dir(previous, { depth: null, colors: true });
+    let vertex: typeof INode;
+    // create previous object.
     while (priorityQueue.length) {
       // vertex is {'x':someNum}
-      let vertex = priorityQueue.dequeue();
-      if (vertex.val === endNode) {
+      vertex = priorityQueue.dequeue();
+      if (vertex.value === endNode) {
         break;
       }
+      let vertValue: T = vertex.value;
       // Get the neighbouring nodes for this node.
-      let adjList = this.adjacencyList[vertex.val];
+      let adjList: WeightedEdge<T>[] = this.adjacencyList[vertValue];
       // Calculate the distance to that vertex from
       // the starting vertex.
-      adjList.forEach((value, index) => {
-        if (visited.indexOf(value.node) === -1 && value.weight < distances[value.node]) {
+      // addjList is an array of objects where the key is the node name
+      // and the value is the weight of the edge
+      if (vertex.val || distances[vertValue] !== Infinity) {
+        adjList.forEach((value: WeightedEdge<T>) => {
           let newDist = value.weight;
-          let prev = previous[vertex.val];
-          if (prev) {
-            newDist = newDist + distances[vertex.val]
-          }
+          let prev = previous[vertValue];
+          // if (prev) {
+          newDist = newDist + distances[vertValue]
+          // }
           if (newDist < distances[value.node]) {
             distances[value.node] = newDist;
           }
-          // else {
-          //   distances[value.node] = value.weight;
-          // }
-          previous[value.node] = vertex.val;
+          previous[value.node] = vertex.value;
           priorityQueue.enqueue(value.node, value.weight)
-        }
-      });
-      visited.push(vertex.val);
+        });
+      }
+      visited.push(vertex.value);
     }
     console.dir(distances, { depth: null, colors: true })
     console.dir(previous, { depth: null, colors: true })
@@ -101,7 +98,7 @@ graph.addEdge("C", "D", 2)
 graph.addEdge("D", "E", 3)
 graph.addEdge("C", "F", 4)
 graph.addEdge("D", "F", 1)
-graph.addEdge("F", "E", 1)
+graph.addEdge("E", "F", 1)
 // console.dir(graph, { depth: null, colors: true });
 let shortest = graph.shortestPath("A", "E") // Should be '6', A-C-D-F-E
 console.log(shortest);
