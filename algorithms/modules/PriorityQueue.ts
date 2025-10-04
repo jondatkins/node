@@ -143,6 +143,12 @@ class PriorityQueue<T> {
     }
     return max;
   }
+
+
+  length() {
+    return this.values.length;
+  }
+
   printParent(value: Node<T>) {
     let index = this.values.indexOf(value);
     let parentIndex = Math.floor((index - 1) / 2)
@@ -167,17 +173,17 @@ class PriorityQueue<T> {
   }
 }
 
-let ER = new PriorityQueue();
-ER.enqueue("common cold", 5)
-ER.enqueue("gunshot wound", 1)
-ER.enqueue("high fever", 4)
-ER.enqueue("broken arm", 2)
-ER.enqueue("glass in foot", 3)
-console.log(ER.dequeue());
-console.log(ER.dequeue());
-console.log(ER.dequeue());
-console.log(ER.dequeue());
-console.log(ER.dequeue());
+// let ER = new PriorityQueue();
+// ER.enqueue("common cold", 5)
+// ER.enqueue("gunshot wound", 1)
+// ER.enqueue("high fever", 4)
+// ER.enqueue("broken arm", 2)
+// ER.enqueue("glass in foot", 3)
+// console.log(ER.dequeue());
+// console.log(ER.dequeue());
+// console.log(ER.dequeue());
+// console.log(ER.dequeue());
+// console.log(ER.dequeue());
 // let testHeap = new PriorityQueue();
 // testHeap.enqueue("low fever", 3);
 // // low fever is min value at root.

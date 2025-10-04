@@ -1,5 +1,5 @@
 // import { SimplePriorityQueue } from "./simplePriorityQueue.js"
-const { SimplePriorityQueue, INode } = require("./SimplePriorityQueue.ts");
+const { PriorityQueue, INode } = require("./PriorityQueue.ts");
 
 interface WeightedEdge<T> {
   node: T;
@@ -27,7 +27,7 @@ class WeightedGraph<T extends string | number> {
 
   shortestPath(startNode: T, endNode: T) {
     let distances: Record<T, number> = {} as Record<T, number>;
-    let priorityQueue = new SimplePriorityQueue();
+    let priorityQueue = new PriorityQueue();
     let previous: Record<T, T | null> = {} as Record<T, T>;
     let path = [] //to return at end
     for (const node in this.adjacencyList) {
