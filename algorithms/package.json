@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning ./modules/fibonacci.ts",
+    "start": "node --disable-warning=ExperimentalWarning ./modules/coinChange.ts",
     "test": "jest ./tests/WeightedGraph.test.js",
     "testSingleChild": "jest -t 'remove non root node with single child test' ./tests/WeightedGraph.test.js"
   },

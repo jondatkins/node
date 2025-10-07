@@ -28,6 +28,7 @@ const fibonacci = (num: number, isUseMemo = true): number => {
 }
 
 let numCalls = 0;
+
 function fib(n: number, memo: number[] = []): number {
   if (memo[n] !== undefined) return memo[n];
   if (n <= 2) return 1;
@@ -37,11 +38,19 @@ function fib(n: number, memo: number[] = []): number {
   return res;
 }
 
+function fibTable(n: number) {
+  if (n <= 2) return 1;
+  let fibNums = [0, 1, 1];
+  for (let i = 3; i <= n; i++) {
+    fibNums[i] = fibNums[i - 1] + fibNums[i - 2];
+  }
+  return fibNums[n];
+}
 // console.log(fibonacci(4)) // 3; 
 // console.log(fibonacci(10)) // 55; 
 // console.log(fibonacci(28)) // 317811; 
 // console.log(fibonacci(35, false)) // 9227465; 
-console.log(fibonacci(100)) // 9227465; 
+console.log(fibTable(100)) // 9227465; 
 console.log(numCalls);
 
 module.exports = { fibonacci };
