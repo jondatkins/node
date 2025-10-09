@@ -17,22 +17,24 @@ const minCoinChange = (coins: number[], amount: number): number[] => {
   return result;
 }
 
-const coinChange = (coins: number[], amount: number): number[] => {
-  let result = [];
-  let sum = 0;
-  let index = coins.length - 1;
 
-  while (index >= 0) {
-    sum += coins[index];
-    if (sum <= amount) {
-      result.push(coins[index]);
-    }
-    else {
-      sum -= coins[index];
-      index--;
+// To make 10, use 10 1s. Use 4 2s and 2 1s. Use 2 2s, 1 1 and 1 5. And use 2 5s.
+const coinChange = (coins: number[], amount: number): number => {
+  let sum: number = 0;
+  let numWays: number = 0;
+  for (let i = 0; i < coins.length; i++) {
+    let j = 0;
+    sum = coins[i];
+    while (sum <= amount) {
+      if (sum === amount) {
+        numWays++;
+        j++;
+        break;
+      }
+      sum += coins[j];
     }
   }
-  return result;
+  return numWays;
 }
 
 // let x = minCoinChange([1, 2, 3, 4, 5], 11); // this should return: [5, 5, 1]
@@ -43,24 +45,24 @@ const coinChange = (coins: number[], amount: number): number[] => {
 // console.log(z);
 
 const denominations = [1, 5, 10, 25]
-let a = coinChange(denominations, 1) // 1
-console.log(a);
-let b = coinChange(denominations, 2) // 1
-console.log(b);
-let c = coinChange(denominations, 5) // 2
-console.log(c);
-let d = coinChange(denominations, 10) // 4
-console.log(d);
+// let a = coinChange(denominations, 1) // 1
+// console.log(a);
+// let b = coinChange(denominations, 2) // 1
+// console.log(b);
+// let c = coinChange(denominations, 5) // 2
+// console.log(c);
+// let d = coinChange(denominations, 10) // 4
+// console.log(d);
 let e = coinChange(denominations, 25) // 13
 console.log(e);
-let f = coinChange(denominations, 45) // 39
-console.log(f);
-let g = coinChange(denominations, 100) // 242
-console.log(g);
-let h = coinChange(denominations, 145) // 622
-console.log(h);
-let i = coinChange(denominations, 1451) // 425663
-console.log(i);
-let k = coinChange(denominations, 14511) // 409222339
-console.log(k);
+// let f = coinChange(denominations, 45) // 39
+// console.log(f);
+// let g = coinChange(denominations, 100) // 242
+// console.log(g);
+// let h = coinChange(denominations, 145) // 622
+// console.log(h);
+// let i = coinChange(denominations, 1451) // 425663
+// console.log(i);
+// let k = coinChange(denominations, 14511) // 409222339
+// console.log(k);
 module.exports = { minCoinChange, coinChange };
