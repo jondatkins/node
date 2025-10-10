@@ -20,21 +20,9 @@ const minCoinChange = (coins: number[], amount: number): number[] => {
 
 // To make 10, use 10 1s. Use 4 2s and 2 1s. Use 2 2s, 1 1 and 1 5. And use 2 5s.
 const coinChange = (coins: number[], amount: number): number => {
-  let sum: number = 0;
-  let numWays: number = 0;
-  for (let i = 0; i < coins.length; i++) {
-    let j = 0;
-    sum = coins[i];
-    while (sum <= amount) {
-      if (sum === amount) {
-        numWays++;
-        j++;
-        break;
-      }
-      sum += coins[j];
-    }
-  }
-  return numWays;
+  let dp = Array.apply(null, Array(amount + 1)).map(function () { return amount + 1 });
+  dp[0] = 0;
+  return 0;
 }
 
 // let x = minCoinChange([1, 2, 3, 4, 5], 11); // this should return: [5, 5, 1]
